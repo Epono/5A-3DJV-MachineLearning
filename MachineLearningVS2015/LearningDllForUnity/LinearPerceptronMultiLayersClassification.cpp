@@ -1,4 +1,4 @@
-#include <random>
+ï»¿#include <random>
 
 #include "LinearPerceptronMultiLayersClassification.h"
 #include "Model.h"
@@ -6,32 +6,38 @@
 int* LinearPerceptronMultiLayersClassification_Creation(int inputSize)
 {
 	ModelMultiLayers* modelMultiLayers = new ModelMultiLayers();
-	modelMultiLayers->numberOfInternLayers = 1;
-	modelMultiLayers->layers = (Layer**) malloc(sizeof(Layer*) * modelMultiLayers->numberOfInternLayers);
+	modelMultiLayers->numberOfLayers = 1;
+	modelMultiLayers->layers = (Layer**) malloc(sizeof(Layer*) * modelMultiLayers->numberOfLayers);
 
-	for(int i = 0; i < modelMultiLayers->numberOfInternLayers; ++i)
+	// On initialise chaque couche
+	for(int i = 0; i < modelMultiLayers->numberOfLayers; ++i)
 	{
-		Layer* tempLayer = new Layer();
-		tempLayer->layerNumber = i;
-		tempLayer->numberOfModels = inputSize + tempLayer->layerNumber + 1;
-		tempLayer->models = (Model**) malloc(sizeof(Model*) * tempLayer->numberOfModels);
+		Layer* layer = new Layer();
+		layer->layerNumber = i;
+		// Le nombre de neurones c'est "Nombre de paramÃ¨tres + 1 (biais) + numÃ©ro de la couche (+1 neurone par profondeur de couche)"
+		layer->numberOfModels = inputSize + layer->layerNumber + 1;
+		layer->models = (Model**) malloc(sizeof(Model*) * layer->numberOfModels);
 
-		for(int j = 0; j < tempLayer->numberOfModels; ++j)
+		// On initialise chaque neurone
+		for(int j = 0; j < layer->numberOfModels; ++j)
 		{
-			Model* m = new Model();
-			m->modelNumber = j;
-			m->numberOfParameters = tempLayer->numberOfModels;
-			m->data = new double[m->numberOfParameters];
+			Model* model = new Model();
+			model->modelNumber = j;
+			model->numberOfParameters = layer->numberOfModels;
+			// Pas sur pour l'initialisation
+			model->x = 1;
+			model->data = new double[model->numberOfParameters];
 
-			for(int k = 0; k < m->numberOfParameters; ++k)
+			// On initialise les poids des liaisons
+			for(int k = 0; k < model->numberOfParameters; ++k)
 			{
-				m->data[k] = (double) ((double) rand() / (RAND_MAX) +1) / 2;
+				model->data[k] = (double) ((double) rand() / (RAND_MAX) +1) / 2;
 			}
 
-			tempLayer->models[j] = m;
+			layer->models[j] = model;
 		}
 
-		modelMultiLayers->layers[i] = tempLayer;
+		modelMultiLayers->layers[i] = layer;
 	}
 
 	return (int*) modelMultiLayers;
@@ -39,32 +45,46 @@ int* LinearPerceptronMultiLayersClassification_Creation(int inputSize)
 
 void LinearPerceptronMultiLayersClassification_Training(int* index, int iterationsCount, int size, int inputSize, double* inputInput, double* inputResult)
 {
-	//// On récupère le modèle
-	//Model* m = (Model*) index;
+	ModelMultiLayers* modelMultiLayers = (ModelMultiLayers*) index;
 
-	//double pas = 0.1;
+	for(int i = 1; i < modelMultiLayers->numberOfLayers; ++i)
+	{
+		Layer* layer = modelMultiLayers->layers[i];
+		Layer* previousLayer = modelMultiLayers->layers[i-1];
 
-	//// Pour un certain nombre d'itérations
-	//for(int i = 0; i < iterationsCount; ++i)
+		for(int j = 0; j < layer->numberOfModels; ++j)
+		{
+			Model* model = layer->models[j];
+			double sum = 0;
+
+			for(int k = 0; k < previousLayer->numberOfModels; ++k)
+			{
+				double previousX = previousLayer->models[k]->x;
+				double w = layer->models[j]->data[k];
+				sum += previousX * w;
+			}
+
+			model->x = tanh(sum);
+		}
+	}
+
+	//for(i = 1; i < nNumLayers; i++)
 	//{
-	//	int dataToTest = (rand() % size);
-	//	double *dataTableToTest = new double[inputSize];
-
-	//	// On remplit
-	//	for(int j = 0; j < inputSize; ++j)
+	//	for(j = 0; j < pLayers[i].nNumNeurons; j++)
 	//	{
-	//		dataTableToTest[j] = inputInput[(dataToTest*inputSize) + j];
-	//	}
-
-	//	if(LinearPerceptronMultiLayersClassification_Predict(index, inputSize, dataTableToTest) != inputResult[dataToTest])
-	//	{
-	//		m->data[0] += pas * inputResult[dataToTest];
-	//		for(int j = 0; j < inputSize; ++j)
+	//		/* --- calcul de la somme pondï¿½rï¿½e en entrï¿½e */
+	//		double sum = 0.0;
+	//		for(k = 0; k < pLayers[i - 1].nNumNeurons; k++)
 	//		{
-	//			m->data[j + 1] += pas * inputResult[dataToTest] * dataTableToTest[j];
+	//			double out = pLayers[i - 1].pNeurons[k].x;
+	//			double w = pLayers[i].pNeurons[j].w[k];
+	//			sum += w * out;
 	//		}
+	//		/* --- application de la fonction d'activation (sigmoid) */
+	//		pLayers[i].pNeurons[j].x = 1.0 / (1.0 + exp(-dGain * sum));
 	//	}
 	//}
+
 }
 
 double LinearPerceptronMultiLayersClassification_Predict(int* index, int inputSize, double* input)
@@ -85,16 +105,16 @@ void LinearPerceptronMultiLayersClassification_Deletion(int* index)
 {
 	ModelMultiLayers* modelMultiLayers = (ModelMultiLayers*) index;
 
-	for(int i = 0; i < modelMultiLayers->numberOfInternLayers; ++i)
+	for(int i = 0; i < modelMultiLayers->numberOfLayers; ++i)
 	{
-		Layer* tempLayer = modelMultiLayers->layers[i];
+		Layer* layer = modelMultiLayers->layers[i];
 
-		for(int j = 0; j < tempLayer->numberOfModels; ++j)
+		for(int j = 0; j < layer->numberOfModels; ++j)
 		{
-			Model* m = tempLayer->models[j];
-			delete[] m->data;
+			Model* model = layer->models[j];
+			delete[] model->data;
 		}
-		delete[] tempLayer->models;
+		delete[] layer->models;
 	}
 	delete[] modelMultiLayers->layers;
 }

@@ -3,15 +3,19 @@
 // Simple neurone
 struct Model
 {
-	// Numéro du neurone dans la couche si c'est un multi couches
+	// Poids du neurone
+	double* data;
+
+	/////////////////////////////////////////////////////////////////////// Utilisé que pour le multi couche
+	// Numéro du neurone dans la couche
 	// Commence à 0
 	int modelNumber;
 
-	// Nombre de paramètres si c'est un multi couches
+	// Nombre de paramètres si
 	int numberOfParameters;
 
-	// Poids du neurone
-	double* data;
+	// Valeur de sortie effective
+	int x;
 };
 
 // Couche de neurones
@@ -32,7 +36,7 @@ struct Layer
 struct ModelMultiLayers
 {
 	// Nombre de couches
-	int numberOfInternLayers;
+	int numberOfLayers;
 
 	// Tableau de pointeurs sur les couches
 	Layer** layers;
