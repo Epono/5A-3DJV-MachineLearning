@@ -81,6 +81,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)LearningDllForUnity\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\..\MachineLearningUnity\Assets\Libs\</AdditionalLibraryDirectories>
@@ -115,10 +116,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\LearningDllForUnity\LinearPerceptronClassification.cpp" />
+    <ClCompile Include="..\LearningDllForUnity\LinearPerceptronRegression.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronClassification.h" />
+    <ClInclude Include="..\LearningDllForUnity\LinearPerceptronRegression.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

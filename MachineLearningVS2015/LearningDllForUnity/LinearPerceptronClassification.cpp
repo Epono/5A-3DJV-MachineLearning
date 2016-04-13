@@ -12,7 +12,6 @@ int* LinearPerceptronClassification_Creation(int inputSize)
 	for(int i = 0; i < inputSize + 1; ++i)
 	{
 		m->data[i] = (double) ((double) rand() / (RAND_MAX) +1) / 2;
-		//m->data[i] = 0;
 	}
 	return (int*) m;
 }

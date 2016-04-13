@@ -17,6 +17,20 @@ public class MainScript : MonoBehaviour {
     [DllImport("LearningDllForUnity")]
     public extern static void LinearPerceptronClassification_Deletion(System.IntPtr index);
 
+    /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    [DllImport("LearningDllForUnity")]
+    public extern static System.IntPtr LinearPerceptronRegression_Creation(int inputSize);
+
+    [DllImport("LearningDllForUnity")]
+    public extern static void LinearPerceptronRegression_Training(System.IntPtr index, int size, int inputSize, double[] inputInput, double[] inputResult);
+
+    [DllImport("LearningDllForUnity")]
+    public extern static double LinearPerceptronRegression_Predict(System.IntPtr index, int inputSize, double[] input);
+
+    [DllImport("LearningDllForUnity")]
+    public extern static void LinearPerceptronRegression_Deletion(System.IntPtr index);
+
     [SerializeField]
     Material defaultMaterial;
 
@@ -31,7 +45,7 @@ public class MainScript : MonoBehaviour {
 
     }
 
-    public void train() {
+    public void Train_SimpleClassification() {
 
         foreach(GameObject go in tab) {
             if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
@@ -62,5 +76,39 @@ public class MainScript : MonoBehaviour {
         }
 
         LinearPerceptronClassification_Deletion(index);
+    }
+
+    public void Train_SimpleRegression() {
+
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+                go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
+            }
+        }
+
+        index = LinearPerceptronRegression_Creation(2);
+        List<double> listInputInput = new List<double>();
+        List<double> listInputResult = new List<double>();
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y != 0) {
+                listInputInput.Add(go.transform.position.x);
+                listInputInput.Add(go.transform.position.z);
+                listInputResult.Add(go.transform.position.y);
+            }
+        }
+
+        double[] inputInput = listInputInput.ToArray();
+        double[] inputResult = listInputResult.ToArray();
+
+        LinearPerceptronRegression_Training(index, inputInput.Length / 2, 2, inputInput, inputResult);
+
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y == 0) {
+                float newY = (float)LinearPerceptronRegression_Predict(index, 2, new double[2] { go.transform.position.x, go.transform.position.z });
+                go.transform.position = new Vector3(go.transform.position.x, newY, go.transform.position.z);
+            }
+        }
+
+        LinearPerceptronRegression_Deletion(index);
     }
 }
