@@ -67,7 +67,6 @@ void LinearPerceptronMultiLayersClassification_Training(int* index, int iteratio
 	//}
 }
 
-
 double LinearPerceptronMultiLayersClassification_Predict(int* index, int inputSize, double* input)
 {
 	//Model* m = (Model*) index;
@@ -82,20 +81,20 @@ double LinearPerceptronMultiLayersClassification_Predict(int* index, int inputSi
 	return 0;
 }
 
-// classify sigm -1 1
-// result sans sigm
-
 void LinearPerceptronMultiLayersClassification_Deletion(int* index)
 {
-	//Model* m = (Model*) index;
-	//delete m->data;
-	//delete m;
+	ModelMultiLayers* modelMultiLayers = (ModelMultiLayers*) index;
+
+	for(int i = 0; i < modelMultiLayers->numberOfInternLayers; ++i)
+	{
+		Layer* tempLayer = modelMultiLayers->layers[i];
+
+		for(int j = 0; j < tempLayer->numberOfModels; ++j)
+		{
+			Model* m = tempLayer->models[j];
+			delete[] m->data;
+		}
+		delete[] tempLayer->models;
+	}
+	delete[] modelMultiLayers->layers;
 }
-
-// PLA 63 classification
-// Rosenblatt classif
-// Regression avec la matrice chiante
-// alpha à 0.1
-
-// Regression avec 3 points, ca doit donner un plan
-// Regression avec 23 points, ca doit donner un plan qui essaye de passer au milieu

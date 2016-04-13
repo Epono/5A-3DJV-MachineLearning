@@ -65,7 +65,7 @@ double LinearPerceptronClassification_Predict(int* index, int inputSize, double*
 void LinearPerceptronClassification_Deletion(int* index)
 {
 	Model* m = (Model*) index;
-	delete m->data;
+	delete[] m->data;
 	delete m;
 }
 

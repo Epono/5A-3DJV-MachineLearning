@@ -87,7 +87,7 @@ double LinearPerceptronRegression_Predict(int* index, int inputSize, double* inp
 void LinearPerceptronRegression_Deletion(int* index)
 {
 	Model* m = (Model*) index;
-	delete m->data;
+	delete[] m->data;
 	delete m;
 }
 
