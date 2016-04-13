@@ -16,29 +16,46 @@ int* LinearPerceptronClassification_Creation(int inputSize)
 	return (int*) m;
 }
 
-void LinearPerceptronClassification_Training(int* index, int size, int inputSize, double* inputInput, double* inputResult)
+void LinearPerceptronClassification_Training(int* index, int iterationsCount, int size, int inputSize, double* inputInput, double* inputResult)
 {
 	// On récupère le modèle
 	Model* m = (Model*) index;
 
-	// Pour chaque exemple (ex : aux coordonnées (2, 3), la boule est en -1)
-	for(int i = 0; i < size; ++i)
+	double pas = 0.1;
+
+	// Pour un certain nombre d'itérations
+	for(int i = 0; i < iterationsCount; ++i)
 	{
-		// On regarde si on prédit bien
-		if(LinearPerceptronClassification_Predict(index, inputSize, new double[] { inputInput[i], inputInput[i + 1] }) != inputResult[i])
+		int dataToTest = (rand() % size);
+		double *dataTableToTest = new double[inputSize];
+
+		// On remplit 
+		for(int j = 0; j < inputSize; ++j)
 		{
-			//TODO Rosenblatt
+			dataTableToTest[j] = inputInput[(dataToTest*inputSize) + j];
+		}
+		if(LinearPerceptronClassification_Predict(index, inputSize, dataTableToTest) != inputResult[dataToTest])
+		{
+			m->data[0] += pas * inputResult[dataToTest];
+			for(int j = 0; j < inputSize; ++j)
+			{
+				m->data[j] += pas * inputResult[dataToTest] * dataTableToTest[j];
+			}
 		}
 	}
-	// X = tablea de tableau, entree de tous les exemples (points reperes) [[0.1, 0.2], [0.1, 0.2], [0.1, 0.2], [0.1, 0.2]]
-	// => inputSize de 2
-	// Y = tableau de résult [1, 1, -1, 1]
 }
 
 double LinearPerceptronClassification_Predict(int* index, int inputSize, double* input)
 {
 	Model* m = (Model*) index;
-	return 1;
+
+	double* data = m->data;
+	double val = data[0];
+	for(int i = 0; i < inputSize; ++i)
+	{
+		val += data[i + 1] * input[i];
+	}
+	return (val < 0 ? -1 : 1);
 }
 
 // classify sigm -1 1

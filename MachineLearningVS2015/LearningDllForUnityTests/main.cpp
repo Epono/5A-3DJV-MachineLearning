@@ -5,9 +5,9 @@
 void main()
 {
 	int* ptr = LinearPerceptronClassification_Creation(1);
-	double wtf = LinearPerceptronClassification_Training(ptr, 0);
+	//	double wtf = LinearPerceptronClassification_Training(ptr, 0);
 
-	std::cout << wtf << std::endl;
+	//	std::cout << wtf << std::endl;
 
 	getchar();
 }
