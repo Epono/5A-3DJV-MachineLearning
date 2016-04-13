@@ -1,26 +1,40 @@
 #include <random>
 
 #include "LinearPerceptronMultiLayersClassification.h"
-#include "ModelMultiLayers.h"
+#include "Model.h"
 
 int* LinearPerceptronMultiLayersClassification_Creation(int inputSize)
 {
-	ModelMultiLayers* m = new ModelMultiLayers();
-	m->data = new double[inputSize + 1];
+	ModelMultiLayers* modelMultiLayers = new ModelMultiLayers();
+	modelMultiLayers->numberOfInternLayers = 1;
+	modelMultiLayers->layers = (Layer**) malloc(sizeof(Layer*) * modelMultiLayers->numberOfInternLayers);
 
-	m->previousLayers = (ModelMultiLayers**) malloc(sizeof(ModelMultiLayers*) * inputSize + 1);
-	for(int i = 0; i < inputSize + 1; ++i)
+	for(int i = 0; i < modelMultiLayers->numberOfInternLayers; ++i)
 	{
-		m->previousLayers[i] = new ModelMultiLayers();
-		m->previousLayers[i]->data = new double[inputSize + 2];
+		Layer* tempLayer = new Layer();
+		tempLayer->layerNumber = i;
+		tempLayer->numberOfModels = inputSize + tempLayer->layerNumber + 1;
+		tempLayer->models = (Model**) malloc(sizeof(Model*) * tempLayer->numberOfModels);
+
+		for(int j = 0; j < tempLayer->numberOfModels; ++j)
+		{
+			Model* m = new Model();
+			m->modelNumber = j;
+			m->numberOfParameters = tempLayer->numberOfModels;
+			m->data = new double[m->numberOfParameters];
+
+			for(int k = 0; k < m->numberOfParameters; ++k)
+			{
+				m->data[k] = (double) ((double) rand() / (RAND_MAX) +1) / 2;
+			}
+
+			tempLayer->models[j] = m;
+		}
+
+		modelMultiLayers->layers[i] = tempLayer;
 	}
 
-	// On initialise les w en random
-	for(int i = 0; i < inputSize + 1; ++i)
-	{
-		m->data[i] = (double) ((double) rand() / (RAND_MAX) +1) / 2;
-	}
-	return (int*) m;
+	return (int*) modelMultiLayers;
 }
 
 void LinearPerceptronMultiLayersClassification_Training(int* index, int iterationsCount, int size, int inputSize, double* inputInput, double* inputResult)
