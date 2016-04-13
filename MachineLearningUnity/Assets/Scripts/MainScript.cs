@@ -66,7 +66,7 @@ public class MainScript : MonoBehaviour {
         double[] inputInput = listInputInput.ToArray();
         double[] inputResult = listInputResult.ToArray();
 
-        LinearPerceptronClassification_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
+        LinearPerceptronClassification_Training(index, 1000, inputInput.Length / 2, 2, inputInput, inputResult);
 
         foreach(GameObject go in tab) {
             if(go.transform.position.y == 0) {
