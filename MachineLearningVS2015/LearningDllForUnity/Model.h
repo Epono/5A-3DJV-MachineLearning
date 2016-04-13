@@ -12,6 +12,9 @@ struct Model
 
 	// Poids du neurone
 	double* data;
+
+	//Delta du neurone
+	double delta;
 };
 
 // Couche de neurones
