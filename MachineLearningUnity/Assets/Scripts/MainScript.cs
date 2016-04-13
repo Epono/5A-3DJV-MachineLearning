@@ -78,6 +78,74 @@ public class MainScript : MonoBehaviour {
         LinearPerceptronClassification_Deletion(index);
     }
 
+    public void Train_SimpleCrossClassification() {
+
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+                go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
+            }
+        }
+
+        index = LinearPerceptronClassification_Creation(4);
+        List<double> listInputInput = new List<double>();
+        List<double> listInputResult = new List<double>();
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y != 0) {
+                listInputInput.Add(go.transform.position.x);
+                listInputInput.Add(go.transform.position.z);
+                listInputInput.Add(Mathf.Abs(go.transform.position.x));
+                listInputInput.Add(Mathf.Abs(go.transform.position.z));
+                listInputResult.Add(go.transform.position.y);
+            }
+        }
+        double[] inputInput = listInputInput.ToArray();
+        double[] inputResult = listInputResult.ToArray();
+
+        LinearPerceptronClassification_Training(index, 10000, inputInput.Length / 2, 4, inputInput, inputResult);
+
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y == 0) {
+                float newY = (float)LinearPerceptronClassification_Predict(index, 4, new double[4] { go.transform.position.x, go.transform.position.z, Mathf.Abs(go.transform.position.x) , Mathf.Abs(go.transform.position.z) });
+                go.transform.position = new Vector3(go.transform.position.x, newY / 2, go.transform.position.z);
+            }
+        }
+
+        LinearPerceptronClassification_Deletion(index);
+    }
+
+    public void Train_SimpleSquareClassification() {
+
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+                go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
+            }
+        }
+
+        index = LinearPerceptronClassification_Creation(2);
+        List<double> listInputInput = new List<double>();
+        List<double> listInputResult = new List<double>();
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y != 0) {
+                listInputInput.Add(go.transform.position.x * go.transform.position.x);
+                listInputInput.Add(go.transform.position.z * go.transform.position.z);
+                listInputResult.Add(go.transform.position.y);
+            }
+        }
+        double[] inputInput = listInputInput.ToArray();
+        double[] inputResult = listInputResult.ToArray();
+
+        LinearPerceptronClassification_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
+
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y == 0) {
+                float newY = (float)LinearPerceptronClassification_Predict(index, 2, new double[2] { go.transform.position.x* go.transform.position.x, go.transform.position.z * go.transform.position.z });
+                go.transform.position = new Vector3(go.transform.position.x, newY / 2, go.transform.position.z);
+            }
+        }
+
+        LinearPerceptronClassification_Deletion(index);
+    }
+
     public void Train_SimpleRegression() {
 
         foreach(GameObject go in tab) {
