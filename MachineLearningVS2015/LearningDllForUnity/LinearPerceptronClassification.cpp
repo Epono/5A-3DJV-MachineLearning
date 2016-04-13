@@ -30,7 +30,7 @@ void LinearPerceptronClassification_Training(int* index, int iterationsCount, in
 		int dataToTest = (rand() % size);
 		double *dataTableToTest = new double[inputSize];
 
-		// On remplit 
+		// On remplit
 		for(int j = 0; j < inputSize; ++j)
 		{
 			dataTableToTest[j] = inputInput[(dataToTest*inputSize) + j];
@@ -41,7 +41,7 @@ void LinearPerceptronClassification_Training(int* index, int iterationsCount, in
 			m->data[0] += pas * inputResult[dataToTest];
 			for(int j = 0; j < inputSize; ++j)
 			{
-				m->data[j] += pas * inputResult[dataToTest] * dataTableToTest[j];
+				m->data[j + 1] += pas * inputResult[dataToTest] * dataTableToTest[j];
 			}
 		}
 	}
