@@ -35,6 +35,7 @@ void LinearPerceptronClassification_Training(int* index, int iterationsCount, in
 		{
 			dataTableToTest[j] = inputInput[(dataToTest*inputSize) + j];
 		}
+
 		if(LinearPerceptronClassification_Predict(index, inputSize, dataTableToTest) != inputResult[dataToTest])
 		{
 			m->data[0] += pas * inputResult[dataToTest];
