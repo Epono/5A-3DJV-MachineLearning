@@ -25,46 +25,47 @@ int* LinearPerceptronMultiLayersClassification_Creation(int inputSize)
 
 void LinearPerceptronMultiLayersClassification_Training(int* index, int iterationsCount, int size, int inputSize, double* inputInput, double* inputResult)
 {
-	// On récupère le modèle
-	Model* m = (Model*) index;
+	//// On récupère le modèle
+	//Model* m = (Model*) index;
 
-	double pas = 0.1;
+	//double pas = 0.1;
 
-	// Pour un certain nombre d'itérations
-	for(int i = 0; i < iterationsCount; ++i)
-	{
-		int dataToTest = (rand() % size);
-		double *dataTableToTest = new double[inputSize];
+	//// Pour un certain nombre d'itérations
+	//for(int i = 0; i < iterationsCount; ++i)
+	//{
+	//	int dataToTest = (rand() % size);
+	//	double *dataTableToTest = new double[inputSize];
 
-		// On remplit
-		for(int j = 0; j < inputSize; ++j)
-		{
-			dataTableToTest[j] = inputInput[(dataToTest*inputSize) + j];
-		}
+	//	// On remplit
+	//	for(int j = 0; j < inputSize; ++j)
+	//	{
+	//		dataTableToTest[j] = inputInput[(dataToTest*inputSize) + j];
+	//	}
 
-		if(LinearPerceptronMultiLayersClassification_Predict(index, inputSize, dataTableToTest) != inputResult[dataToTest])
-		{
-			m->data[0] += pas * inputResult[dataToTest];
-			for(int j = 0; j < inputSize; ++j)
-			{
-				m->data[j + 1] += pas * inputResult[dataToTest] * dataTableToTest[j];
-			}
-		}
-	}
+	//	if(LinearPerceptronMultiLayersClassification_Predict(index, inputSize, dataTableToTest) != inputResult[dataToTest])
+	//	{
+	//		m->data[0] += pas * inputResult[dataToTest];
+	//		for(int j = 0; j < inputSize; ++j)
+	//		{
+	//			m->data[j + 1] += pas * inputResult[dataToTest] * dataTableToTest[j];
+	//		}
+	//	}
+	//}
 }
 
 
 double LinearPerceptronMultiLayersClassification_Predict(int* index, int inputSize, double* input)
 {
-	Model* m = (Model*) index;
+	//Model* m = (Model*) index;
 
-	double* data = m->data;
-	double val = data[0];
-	for(int i = 0; i < inputSize; ++i)
-	{
-		val += data[i + 1] * input[i];
-	}
-	return val;
+	//double* data = m->data;
+	//double val = data[0];
+	//for(int i = 0; i < inputSize; ++i)
+	//{
+	//	val += data[i + 1] * input[i];
+	//}
+	//return val;
+	return 0;
 }
 
 // classify sigm -1 1
@@ -72,9 +73,9 @@ double LinearPerceptronMultiLayersClassification_Predict(int* index, int inputSi
 
 void LinearPerceptronMultiLayersClassification_Deletion(int* index)
 {
-	Model* m = (Model*) index;
-	delete m->data;
-	delete m;
+	//Model* m = (Model*) index;
+	//delete m->data;
+	//delete m;
 }
 
 // PLA 63 classification
