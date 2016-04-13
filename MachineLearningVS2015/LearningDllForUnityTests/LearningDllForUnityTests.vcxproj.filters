@@ -24,12 +24,18 @@
     <ClCompile Include="..\LearningDllForUnity\LinearPerceptronRegression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\LearningDllForUnity\LinearPerceptronMultiLayersClassification.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronClassification.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronRegression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LearningDllForUnity\LinearPerceptronMultiLayersClassification.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

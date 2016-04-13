@@ -24,12 +24,21 @@
     <ClInclude Include="Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LinearPerceptronMultiLayersClassification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelMultiLayers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LinearPerceptronClassification.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LinearPerceptronRegression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearPerceptronMultiLayersClassification.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -116,11 +116,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\LearningDllForUnity\LinearPerceptronClassification.cpp" />
+    <ClCompile Include="..\LearningDllForUnity\LinearPerceptronMultiLayersClassification.cpp" />
     <ClCompile Include="..\LearningDllForUnity\LinearPerceptronRegression.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronClassification.h" />
+    <ClInclude Include="..\LearningDllForUnity\LinearPerceptronMultiLayersClassification.h" />
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronRegression.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

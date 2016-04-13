@@ -114,11 +114,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="LinearPerceptronClassification.h" />
+    <ClInclude Include="LinearPerceptronMultiLayersClassification.h" />
     <ClInclude Include="LinearPerceptronRegression.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelMultiLayers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LinearPerceptronClassification.cpp" />
+    <ClCompile Include="LinearPerceptronMultiLayersClassification.cpp" />
     <ClCompile Include="LinearPerceptronRegression.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
