@@ -9,9 +9,10 @@ int* LinearPerceptronClassification_Creation(int inputSize)
 	m->data = new double[inputSize + 1];
 
 	// On initialise les w en random
-	for(int i = 0; i < inputSize; ++i)
+	for(int i = 0; i < inputSize + 1; ++i)
 	{
 		m->data[i] = (double) ((double) rand() / (RAND_MAX) +1) / 2;
+		//m->data[i] = 0;
 	}
 	return (int*) m;
 }
