@@ -13,6 +13,9 @@ public class SphereScript : MonoBehaviour {
     [SerializeField]
     Material blueMaterial;
 
+    [SerializeField]
+    Material greenMaterial;
+
     public bool isExample = true;
 
     // Use this for initialization
@@ -23,10 +26,12 @@ public class SphereScript : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if(!Application.isPlaying) {
-            if(gameObject.transform.position.y > 0) {
+            if(gameObject.transform.position.y == 1) {
                 gameObject.GetComponent<Renderer>().material = redMaterial;
-            } else if(gameObject.transform.position.y < 0) {
+            } else if(gameObject.transform.position.y == -1) {
                 gameObject.GetComponent<Renderer>().material = blueMaterial;
+            } else if(gameObject.transform.position.y == 2) {
+                gameObject.GetComponent<Renderer>().material = greenMaterial;
             } else {
                 gameObject.GetComponent<Renderer>().material = defaultMaterial;
                 isExample = false;
