@@ -130,6 +130,7 @@
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronMultiLayersRegression.h" />
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronRegression.h" />
     <ClInclude Include="..\LearningDllForUnity\LloydsRBF.h" />
+    <ClInclude Include="..\LearningDllForUnity\Model.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

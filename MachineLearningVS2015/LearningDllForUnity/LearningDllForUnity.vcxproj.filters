@@ -39,14 +39,14 @@
     <ClInclude Include="LinearPerceptronRegression.h">
       <Filter>Header Files\Linear</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Header Files\Linear</Filter>
-    </ClInclude>
     <ClInclude Include="BasicRBF.h">
       <Filter>Header Files\Non_Linear</Filter>
     </ClInclude>
     <ClInclude Include="LloydsRBF.h">
       <Filter>Header Files\Non_Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
