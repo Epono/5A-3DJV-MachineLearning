@@ -70,13 +70,16 @@ public class PictureScript : MonoBehaviour
     #endregion
 
     #region Public Methods
-    public PictureScript(List<List<double>> imageData, int digit)
+    public PictureScript(List<List<double>> imageData, int digit, bool isExample)
     {
         _pixelMaterial = new Dictionary<int, double>();
         _pixels = new List<List<int>>();
         _digit = digit;
 
         _go = new GameObject("Image" + digit);
+        _go.tag = "IMAGE_TEST";
+        if (isExample)
+            _go.tag = "IMAGE_EXAMPLE";
 
         for (int i = 0; i < imageData.Count; ++i)
         {
