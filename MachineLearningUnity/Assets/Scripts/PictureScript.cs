@@ -77,6 +77,7 @@ public class PictureScript : MonoBehaviour
         _digit = digit;
 
         _go = new GameObject("Image" + digit);
+        _go.tag = "IMAGE";
 
         for (int i = 0; i < imageData.Count; ++i)
         {
