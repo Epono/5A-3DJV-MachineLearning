@@ -37,8 +37,13 @@ public class MainScript : MonoBehaviour {
     GameObject[] tab;
     System.IntPtr index;
 
+    GameObject[] examples;
+    GameObject[] tests;
+
     void Start() {
         tab = GameObject.FindGameObjectsWithTag("MABITE");
+        examples = GameObject.FindGameObjectsWithTag("IMAGE_EXAMPLE");
+        tests = GameObject.FindGameObjectsWithTag("IMAGE_TEST");
     }
 
     void Update() {
@@ -47,10 +52,8 @@ public class MainScript : MonoBehaviour {
 
     public void Train_SimpleClassification() {
 
-        foreach(GameObject go in tab)
-        {
-            if (!go.GetComponent<SphereScript>().isExample)
-            {
+        foreach(GameObject go in tab) {
+            if(!go.GetComponent<SphereScript>().isExample) {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -117,10 +120,8 @@ public class MainScript : MonoBehaviour {
 
     public void Train_SimpleXORClassification() {
 
-        foreach(GameObject go in tab)
-        {
-            if (!go.GetComponent<SphereScript>().isExample)
-            {
+        foreach(GameObject go in tab) {
+            if(!go.GetComponent<SphereScript>().isExample) {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -151,10 +152,8 @@ public class MainScript : MonoBehaviour {
 
     public void Train_SimpleSquareClassification() {
 
-        foreach(GameObject go in tab)
-        {
-            if (!go.GetComponent<SphereScript>().isExample)
-            {
+        foreach(GameObject go in tab) {
+            if(!go.GetComponent<SphereScript>().isExample) {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -186,10 +185,8 @@ public class MainScript : MonoBehaviour {
 
     public void Train_SimpleRegression() {
 
-        foreach(GameObject go in tab)
-        {
-            if (!go.GetComponent<SphereScript>().isExample)
-            {
+        foreach(GameObject go in tab) {
+            if(!go.GetComponent<SphereScript>().isExample) {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -296,9 +293,6 @@ public class MainScript : MonoBehaviour {
         LinearPerceptronClassification_Deletion(indexGreen);
     }
 
-    List<GameObject> examples = new List<GameObject>();
-    List<GameObject> tests = new List<GameObject>();
-
     public void Train_Digit() {
 
         Dictionary<int, System.IntPtr> models = new Dictionary<int, System.IntPtr>();
@@ -314,17 +308,17 @@ public class MainScript : MonoBehaviour {
         // Pour chaque exemple (image)
         foreach(GameObject go in examples) {
 
+            PictureScript ps = go.GetComponent<PictureScript>();
+
             // Pour chaque parametre (pixel)
-            // TODO: pas le bon truc parcouru
-            foreach(GameObject goo in tab) {
-                // TODO: Valeur
-                listInputInput.Add(go.transform.position.z);
+            foreach(double pixelColor in ps.GetPixelsColor) {
+                listInputInput.Add(pixelColor);
             }
 
             // Pour chaque modele
             for(int i = 0; i < 10; ++i) {
-                // TODO: Si c'est le bon caractère dans le gameObject
-                if(true) {
+                // Si c'est le bon caractère dans le gameObject
+                if(i == ps.GetDigit) {
                     listInputResult[i].Add(1);
                 } else {
                     listInputResult[i].Add(-1);
@@ -349,8 +343,9 @@ public class MainScript : MonoBehaviour {
         // Pour chaque image
         foreach(GameObject go in examples) {
 
-            // TODO: tableau
-            double[] inputs = listInputInput.ToArray();
+            PictureScript ps = go.GetComponent<PictureScript>();
+
+            double[] inputs = ps.GetPixelsColor.ToArray();
 
             // Pour chaque model
             for(int i = 0; i < 10; ++i) {
@@ -359,15 +354,14 @@ public class MainScript : MonoBehaviour {
 
             // on affiche ce qu'on a décidé
             for(int i = 0; i < 10; ++i) {
-                Debug.Log(" i = " + i + ": " + results[i]);
-                // TODO: au lieu de true, prendre le numéro du script
-                if(results[i] == 1 && true) {
+                //Debug.Log(" i = " + i + ": " + results[i]);
+                if(results[i] == 1 && i == ps.GetDigit) {
                     numberOfSuccessExamples++;
                 }
             }
         }
 
-        Ein = numberOfSuccessExamples / examples.Count;
+        Ein = numberOfSuccessExamples / examples.Length;
 
         // Calcul de Eout (predict sur le jeu de test)
         double Eout;
@@ -375,8 +369,9 @@ public class MainScript : MonoBehaviour {
         // Pour chaque image
         foreach(GameObject go in tests) {
 
-            // TODO: tableau
-            double[] inputs = listInputInput.ToArray();
+            PictureScript ps = go.GetComponent<PictureScript>();
+
+            double[] inputs = ps.GetPixelsColor.ToArray();
 
             // Pour chaque model
             for(int i = 0; i < 10; ++i) {
@@ -385,15 +380,14 @@ public class MainScript : MonoBehaviour {
 
             // on affiche ce qu'on a décidé
             for(int i = 0; i < 10; ++i) {
-                Debug.Log(" i = " + i + ": " + results[i]);
-                // TODO: au lieu de true, prendre le numéro du script
-                if(results[i] == 1 && true) {
+                //Debug.Log(" i = " + i + ": " + results[i]);
+                if(results[i] == 1 && i == ps.GetDigit) {
                     numberOfSuccessTests++;
                 }
             }
         }
 
-        Eout = numberOfSuccessTests / tests.Count;
+        Eout = numberOfSuccessTests / tests.Length;
 
         Debug.Log("Ein : " + Ein);
         Debug.Log("Eout : " + Eout);

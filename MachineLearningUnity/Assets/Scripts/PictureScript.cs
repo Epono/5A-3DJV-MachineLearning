@@ -2,12 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PictureScript : MonoBehaviour
-{
+public class PictureScript : MonoBehaviour {
 
 
-    void Start()
-    {
+    void Start() {
         List<double> a = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         List<double> a1 = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         List<double> a2 = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -72,30 +70,26 @@ public class PictureScript : MonoBehaviour
     #endregion
 
     #region Public Methods
-    public PictureScript(List<List<double>> imageData, int digit, bool isExample)
-    {
+    public PictureScript(List<List<double>> imageData, int digit, bool isExample) {
         _pixelMaterial = new Dictionary<int, double>();
         _pixels = new List<List<int>>();
         _digit = digit;
 
         _go = new GameObject("Image" + digit);
         _go.tag = "IMAGE_TEST";
-        if (isExample)
+        if(isExample)
             _go.tag = "IMAGE_EXAMPLE";
 
-        for (int i = 0; i < imageData.Count; ++i)
-        {
+        for(int i = 0; i < imageData.Count; ++i) {
             List<double> line = imageData[i];
             GameObject pixelLine = new GameObject("PixelLine");
             List<int> pixelLineV = new List<int>();
             pixelLine.transform.parent = _go.transform;
 
-            for (int j = 0; j < line.Count; ++j)
-            {
+            for(int j = 0; j < line.Count; ++j) {
                 double pixelP = line[j];
                 GameObject pixel = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 int pixelID = pixel.GetInstanceID();
-                Debug.Log(pixelID);
                 pixelLineV.Add(pixelID);
                 pixel.name = "Pixel";
                 pixel.transform.parent = pixelLine.transform;
@@ -105,18 +99,16 @@ public class PictureScript : MonoBehaviour
                 color.color = new Color(255 - (float)imageData[i][j], 255 - (float)imageData[i][j], 255 - (float)imageData[i][j]);
                 _pixelMaterial.Add(pixelID, imageData[i][j]);
                 pixel.GetComponent<Renderer>().material.color = new Color(255 - (float)imageData[i][j], 255 - (float)imageData[i][j], 255 - (float)imageData[i][j]);
-            };
+            }
             _pixels.Add(pixelLineV);
-
-        };
+        }
     }
 
-    public void SetColorOfPixel(int pixelX, int pixelY, float grayValue)
-    {
+    public void SetColorOfPixel(int pixelX, int pixelY, float grayValue) {
         Material color = new Material(Shader.Find("Standard"));
         Color newColor = new Color(255 - grayValue, 255 - grayValue, 255 - grayValue);
 
-        
+
 
         int id = _pixels[pixelY][pixelX];
         _pixelMaterial[id] = grayValue;
