@@ -66,7 +66,7 @@ public class MainScript : MonoBehaviour {
         double[] inputInput = listInputInput.ToArray();
         double[] inputResult = listInputResult.ToArray();
 
-        LinearPerceptronClassification_Training(index, 1000, inputInput.Length / 2, 2, inputInput, inputResult);
+        LinearPerceptronClassification_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
 
         foreach(GameObject go in tab) {
             if(go.transform.position.y == 0) {
@@ -86,25 +86,24 @@ public class MainScript : MonoBehaviour {
             }
         }
 
-        index = LinearPerceptronClassification_Creation(3);
+        index = LinearPerceptronClassification_Creation(2);
         List<double> listInputInput = new List<double>();
         List<double> listInputResult = new List<double>();
         foreach(GameObject go in tab) {
             if(go.transform.position.y != 0) {
-                listInputInput.Add(Mathf.Abs(go.transform.position.x));
-                listInputInput.Add(Mathf.Abs(go.transform.position.z));
-                listInputInput.Add(Mathf.Abs(go.transform.position.x - go.transform.position.z));
+                listInputInput.Add(Mathf.Abs(go.transform.position.x) + Mathf.Abs(go.transform.position.z));
+                listInputInput.Add(Mathf.Abs(go.transform.position.x * go.transform.position.z));
                 listInputResult.Add(go.transform.position.y);
             }
         }
         double[] inputInput = listInputInput.ToArray();
         double[] inputResult = listInputResult.ToArray();
 
-        LinearPerceptronClassification_Training(index, 10000, inputInput.Length / 2, 3, inputInput, inputResult);
+        LinearPerceptronClassification_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
 
         foreach(GameObject go in tab) {
             if(go.transform.position.y == 0) {
-                float newY = (float)LinearPerceptronClassification_Predict(index, 3, new double[3] { Mathf.Abs(go.transform.position.x), Mathf.Abs(go.transform.position.z), Mathf.Abs(go.transform.position.x - go.transform.position.z) });
+                float newY = (float)LinearPerceptronClassification_Predict(index, 2, new double[2] { Mathf.Abs(go.transform.position.x) + Mathf.Abs(go.transform.position.z), Mathf.Abs(go.transform.position.x * go.transform.position.z) });
                 go.transform.position = new Vector3(go.transform.position.x, newY / 2, go.transform.position.z);
             }
         }
