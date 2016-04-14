@@ -38,20 +38,6 @@ int* LinearPerceptronMultiLayersClassification_Creation(int inputSize, int* laye
 	return (int*) modelMultiLayers;
 }
 
-double CalculEffectiveOutput(ModelMultiLayers* model, int layerInd, int modelInd)
-{
-	double result(0.0);
-	if (layerInd == 0)
-	{
-
-	}
-	else
-	{
-
-	}
-	return tanh(result); // Tanh de la somme des entrées pondérées
-}
-
 void LinearPerceptronMultiLayersClassification_Training(int* index, int iterationsCount, int size, int inputSize, double* inputInput, double* inputResult)
 {
 	// On récupère le modèle
@@ -71,7 +57,7 @@ void LinearPerceptronMultiLayersClassification_Training(int* index, int iteratio
 		// Pour tous les neurones de la derniere couche on calcule le delta
 		for (int j = 0; j < m->layers[m->numberOfInternLayers]->numberOfModels; ++j)
 		{
-			double xjl = CalculEffectiveOutput(m, m->numberOfInternLayers, j);
+			double xjl = LinearPerceptronMultiLayersClassification_Predict((int*)m, m->numberOfInternLayers, j, dataTableToTest, inputSize, 0);
 			m->layers[m->numberOfInternLayers]->models[j]->delta = (1 - xjl * xjl) * (xjl - inputResult[dataToTest]);
 		}
 		// De l'avant derniere jusque la premiere couche
@@ -83,7 +69,7 @@ void LinearPerceptronMultiLayersClassification_Training(int* index, int iteratio
 				double sum(0.0);
 				for (int l = 0; l < m->layers[j + 1]->numberOfModels; ++l)
 					sum += m->layers[j + 1]->models[l]->data[k + 1] * m->layers[j + 1]->models[l]->delta;
-				double xilm1 = CalculEffectiveOutput(m, j, k);
+				double xilm1 = LinearPerceptronMultiLayersClassification_Predict((int*)m, j, k, dataTableToTest, inputSize, 0);
 				m->layers[j]->models[k]->delta = (1 - xilm1*xilm1) * sum;
 			}
 		}
@@ -91,22 +77,28 @@ void LinearPerceptronMultiLayersClassification_Training(int* index, int iteratio
 		for (int j = 0; j < m->numberOfInternLayers; ++j)
 			for (int k = 0; k < m->layers[j]->numberOfModels; ++k)
 				for (int l = 0; l < m->layers[j]->models[k]->numberOfParameters; ++l)
-					m->layers[j]->models[k]->data[l] -= pas * CalculEffectiveOutput(m, j, k) * m->layers[j]->models[k]->delta;
+					m->layers[j]->models[k]->data[l] -= pas * LinearPerceptronMultiLayersClassification_Predict((int*)m, j, k, dataTableToTest, inputSize, 0) * m->layers[j]->models[k]->delta;
 	}
 }
 
-double LinearPerceptronMultiLayersClassification_Predict(int* index, int inputSize, double* input)
+double LinearPerceptronMultiLayersClassification_Predict(int* index, int layerInd, int modelInd, double* input, int inputSize, int inputInd)
 {
 	ModelMultiLayers* m = (ModelMultiLayers*) index;
 
-	double* data = m->data;
-	double val = data[0];
-	for(int i = 0; i < inputSize; ++i)
+	double result(0.0);
+	result += m->layers[layerInd]->models[modelInd]->data[0];
+	if (layerInd == 0)
 	{
-		val += data[i + 1] * input[i];
+		for (int i = 0; i < inputSize; ++i)
+			result += m->layers[layerInd]->models[modelInd]->data[i + 1] * input[inputInd + i];
 	}
-	return val;
-	return 0;
+	else
+	{
+		for (int i = 0; i < m->layers[layerInd - 1]->models[modelInd]->modelNumber; ++i)
+			result += m->layers[layerInd]->models[modelInd]->data[i + 1] * 
+				LinearPerceptronMultiLayersClassification_Predict(index, layerInd - 1, i, input, inputSize, inputInd);
+	}
+	return tanh(result); // Tanh de la somme des entrées pondérées
 }
 
 void LinearPerceptronMultiLayersClassification_Deletion(int* index)
