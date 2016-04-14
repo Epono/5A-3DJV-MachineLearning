@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
-using System;
 
 public class MainScript : MonoBehaviour {
 
@@ -37,13 +36,8 @@ public class MainScript : MonoBehaviour {
     GameObject[] tab;
     System.IntPtr index;
 
-    GameObject[] examples;
-    GameObject[] tests;
-
     void Start() {
         tab = GameObject.FindGameObjectsWithTag("MABITE");
-        examples = GameObject.FindGameObjectsWithTag("IMAGE_EXAMPLE");
-        tests = GameObject.FindGameObjectsWithTag("IMAGE_TEST");
     }
 
     void Update() {
@@ -292,115 +286,4 @@ public class MainScript : MonoBehaviour {
         LinearPerceptronClassification_Deletion(indexBlue);
         LinearPerceptronClassification_Deletion(indexGreen);
     }
-
-    public void Train_Digit() {
-
-        Dictionary<int, System.IntPtr> models = new Dictionary<int, System.IntPtr>();
-        Dictionary<int, List<double>> listInputResult = new Dictionary<int, List<double>>();
-        for(int i = 0; i < 10; ++i) {
-            // TODO: Changer le nom de la fonction
-            models.Add(i, LinearPerceptronClassification_Creation(28 * 28));
-            listInputResult.Add(i, new List<double>());
-        }
-
-        List<double> listInputInput = new List<Double>();
-
-        // Pour chaque exemple (image)
-        foreach(GameObject go in examples) {
-
-            PictureScript ps = go.GetComponent<PictureScript>();
-
-            // Pour chaque parametre (pixel)
-            foreach(double pixelColor in ps.GetPixelsColor) {
-                listInputInput.Add(pixelColor);
-            }
-
-            // Pour chaque modele
-            for(int i = 0; i < 10; ++i) {
-                // Si c'est le bon caractère dans le gameObject
-                if(i == ps.GetDigit) {
-                    listInputResult[i].Add(1);
-                } else {
-                    listInputResult[i].Add(-1);
-                }
-            }
-        }
-
-        double[] inputInput = listInputInput.ToArray();
-
-        // Pour chaque modèle
-        for(int i = 0; i < 10; ++i) {
-            double[] inputResult = listInputResult[i].ToArray();
-            // TODO: nombre de paramètres ok ?
-            LinearPerceptronClassification_Training(models[i], 10000, inputResult.Length, 28 * 28, inputInput, inputResult);
-        }
-
-        Dictionary<int, double> results = new Dictionary<int, double>();
-
-        // Calcul de Ein (predict sur le jeu d'entrainement)
-        double Ein;
-        int numberOfSuccessExamples = 0;
-        // Pour chaque image
-        foreach(GameObject go in examples) {
-
-            PictureScript ps = go.GetComponent<PictureScript>();
-
-            double[] inputs = ps.GetPixelsColor.ToArray();
-
-            // Pour chaque model
-            for(int i = 0; i < 10; ++i) {
-                results.Add(i, LinearPerceptronClassification_Predict(models[i], 28 * 28, inputs));
-            }
-
-            // on affiche ce qu'on a décidé
-            for(int i = 0; i < 10; ++i) {
-                //Debug.Log(" i = " + i + ": " + results[i]);
-                if(results[i] == 1 && i == ps.GetDigit) {
-                    numberOfSuccessExamples++;
-                }
-            }
-        }
-
-        Ein = numberOfSuccessExamples / examples.Length;
-
-        // Calcul de Eout (predict sur le jeu de test)
-        double Eout;
-        int numberOfSuccessTests = 0;
-        // Pour chaque image
-        foreach(GameObject go in tests) {
-
-            PictureScript ps = go.GetComponent<PictureScript>();
-
-            double[] inputs = ps.GetPixelsColor.ToArray();
-
-            // Pour chaque model
-            for(int i = 0; i < 10; ++i) {
-                results.Add(i, LinearPerceptronClassification_Predict(models[i], 28 * 28, inputs));
-            }
-
-            // on affiche ce qu'on a décidé
-            for(int i = 0; i < 10; ++i) {
-                //Debug.Log(" i = " + i + ": " + results[i]);
-                if(results[i] == 1 && i == ps.GetDigit) {
-                    numberOfSuccessTests++;
-                }
-            }
-        }
-
-        Eout = numberOfSuccessTests / tests.Length;
-
-        Debug.Log("Ein : " + Ein);
-        Debug.Log("Eout : " + Eout);
-
-        // Suppression
-        for(int i = 0; i < 10; ++i) {
-            LinearPerceptronClassification_Deletion(models[i]);
-        }
-    }
 }
-
-// Chaque boule rouge ou bleue : 1 exemple
-
-// vs
-
-// Chaque image : 1 exemple
