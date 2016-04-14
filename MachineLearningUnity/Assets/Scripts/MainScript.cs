@@ -223,19 +223,34 @@ public class MainScript : MonoBehaviour {
         List<double> listInputInputGreen = new List<double>();
         List<double> listInputResultGreen = new List<double>();
 
+        //foreach(GameObject go in tab) {
+        //    if(go.transform.position.y == -1) {
+        //        listInputInputBlue.Add(go.transform.position.x);
+        //        listInputInputBlue.Add(go.transform.position.z);
+        //        listInputResultBlue.Add(go.transform.position.y);
+        //    } else if(go.transform.position.y == 1) {
+        //        listInputInputRed.Add(go.transform.position.x);
+        //        listInputInputRed.Add(go.transform.position.z);
+        //        listInputResultRed.Add(go.transform.position.y);
+        //    } else if(go.transform.position.y == 2) {
+        //        listInputInputGreen.Add(go.transform.position.x);
+        //        listInputInputGreen.Add(go.transform.position.z);
+        //        listInputResultGreen.Add(go.transform.position.y);
+        //    }
+        //}
+
         foreach(GameObject go in tab) {
-            if(go.transform.position.y == -1) {
+            if(go.transform.position.y == -1 || go.transform.position.y == 1 || go.transform.position.y == 2) {
                 listInputInputBlue.Add(go.transform.position.x);
                 listInputInputBlue.Add(go.transform.position.z);
-                listInputResultBlue.Add(go.transform.position.y);
-            } else if(go.transform.position.y == 1) {
                 listInputInputRed.Add(go.transform.position.x);
                 listInputInputRed.Add(go.transform.position.z);
-                listInputResultRed.Add(go.transform.position.y);
-            } else if(go.transform.position.y == 2) {
                 listInputInputGreen.Add(go.transform.position.x);
                 listInputInputGreen.Add(go.transform.position.z);
-                listInputResultGreen.Add(go.transform.position.y);
+
+                listInputResultBlue.Add(go.transform.position.y == -1 ? 1 : -1);
+                listInputResultRed.Add(go.transform.position.y == 1 ? 1 : -1);
+                listInputResultGreen.Add(go.transform.position.y == 2 ? 1 : -1);
             }
         }
 
@@ -256,11 +271,11 @@ public class MainScript : MonoBehaviour {
                 float newYBlue = (float)LinearPerceptronClassification_Predict(indexBlue, 2, new double[2] { go.transform.position.x, go.transform.position.z });
                 float newYGreen = (float)LinearPerceptronClassification_Predict(indexGreen, 2, new double[2] { go.transform.position.x, go.transform.position.z });
                 if(newYRed == 1) {
-                    go.transform.position = new Vector3(go.transform.position.x, 0.5f, go.transform.position.z);
+                    go.transform.position = new Vector3(go.transform.position.x, 1, go.transform.position.z);
                 } else if(newYBlue == 1) {
                     go.transform.position = new Vector3(go.transform.position.x, -1, go.transform.position.z);
                 } else if(newYGreen == 1) {
-                    go.transform.position = new Vector3(go.transform.position.x, 1.5f, go.transform.position.z);
+                    go.transform.position = new Vector3(go.transform.position.x, 2, go.transform.position.z);
                 }
                 //go.transform.position = new Vector3(go.transform.position.x, Mathf.Max(newYBlue, Mathf.Max(newYGreen, newYRed)) / 2, go.transform.position.z);
             }
