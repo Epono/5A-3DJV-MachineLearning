@@ -8,11 +8,12 @@ int* LinearPerceptronClassification_Creation(int inputSize)
 	Model* m = new Model();
 	m->data = new double[inputSize + 1];
 
-	// On initialise les w en random
+	std::random_device rd;
+	std::default_random_engine re;
+	std::uniform_real_distribution<> dis(-1, 1);
+	// On initialise les w en random entre -1 et 1
 	for(int i = 0; i < inputSize + 1; ++i)
-	{
-		m->data[i] = (double) ((double) rand() / (RAND_MAX) +1) / 2;
-	}
+		m->data[i] = dis(re);
 	return (int*) m;
 }
 
@@ -22,11 +23,14 @@ void LinearPerceptronClassification_Training(int* index, int iterationsCount, in
 	Model* m = (Model*) index;
 
 	double pas = 0.1;
+	std::random_device rd;
+	std::default_random_engine re;
+	std::uniform_int_distribution<> dis(0, size-1);
 
 	// Pour un certain nombre d'itérations
 	for(int i = 0; i < iterationsCount; ++i)
 	{
-		int dataToTest = (rand() % size);
+		int dataToTest = dis(re);
 		double *dataTableToTest = new double[inputSize];
 
 		// On remplit

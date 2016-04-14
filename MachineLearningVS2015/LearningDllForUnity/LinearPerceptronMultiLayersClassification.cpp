@@ -9,6 +9,10 @@ int* LinearPerceptronMultiLayersClassification_Creation(int inputSize, int* laye
 	modelMultiLayers->numberOfInternLayers = size;
 	modelMultiLayers->layers = new Layer*[modelMultiLayers->numberOfInternLayers];
 
+	std::random_device rd;
+	std::default_random_engine re;
+	std::uniform_real_distribution<> dis(-1, 1);
+
 	for(int i = 0; i < modelMultiLayers->numberOfInternLayers; ++i)
 	{
 		Layer* tempLayer = new Layer();
@@ -27,8 +31,11 @@ int* LinearPerceptronMultiLayersClassification_Creation(int inputSize, int* laye
 			m->numberOfParameters++; // On ajoute le biais
 			m->data = new double[m->numberOfParameters];
 
-			for(int k = 0; k < m->numberOfParameters; ++k)
-				m->data[k] = (double) ((double) rand() / (RAND_MAX) +1) / 2;
+			for (int k = 0; k < m->numberOfParameters; ++k)
+			{
+				double random = dis(re);
+				m->data[k] = random;
+			}
 			tempLayer->models[j] = m;
 		}
 
@@ -43,25 +50,29 @@ void LinearPerceptronMultiLayersClassification_Training(int* index, int iteratio
 	// On récupère le modèle
 	ModelMultiLayers* m = (ModelMultiLayers*) index;
 
+	std::random_device rd;
+	std::default_random_engine re;
+	std::uniform_int_distribution<> dis(0, size-1);
+
 	double pas = 0.1;
 
 	// Pour un certain nombre d'itérations
 	for(int i = 0; i < iterationsCount; ++i)
 	{
-		int dataToTest = (rand() % size);
+		int dataToTest = dis(re);
 		double *dataTableToTest = new double[inputSize];
 		// On remplit
 		for(int j = 0; j < inputSize; ++j)
 			dataTableToTest[j] = inputInput[(dataToTest*inputSize) + j];
 		
 		// Pour tous les neurones de la derniere couche on calcule le delta
-		for (int j = 0; j < m->layers[m->numberOfInternLayers]->numberOfModels; ++j)
+		for (int j = 0; j < m->layers[m->numberOfInternLayers-1]->numberOfModels; ++j)
 		{
-			double xjl = LinearPerceptronMultiLayersClassification_Predict((int*)m, m->numberOfInternLayers, j, dataTableToTest, inputSize, 0);
-			m->layers[m->numberOfInternLayers]->models[j]->delta = (1 - xjl * xjl) * (xjl - inputResult[dataToTest]);
+			double xjl = LinearPerceptronMultiLayersClassification_Predict((int*)m, m->numberOfInternLayers-1, j, dataTableToTest, inputSize, 0);
+			m->layers[m->numberOfInternLayers-1]->models[j]->delta = (1 - xjl * xjl) * (xjl - inputResult[dataToTest]);
 		}
 		// De l'avant derniere jusque la premiere couche
-		for (int j = m->numberOfInternLayers - 1; j >= 0; --j)
+		for (int j = m->numberOfInternLayers - 2; j >= 0; --j)
 		{
 			// On itere sur tous les neurones de la couche
 			for (int k = 0; k < m->layers[j]->numberOfModels; ++k)

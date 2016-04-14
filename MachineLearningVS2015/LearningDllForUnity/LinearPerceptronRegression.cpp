@@ -10,11 +10,12 @@ int* LinearPerceptronRegression_Creation(int inputSize)
 	Model* m = new Model();
 	m->data = new double[inputSize + 1];
 
+	std::random_device rd;
+	std::default_random_engine re;
+	std::uniform_real_distribution<> dis(-1, 1);
 	// On initialise les w en random
 	for(int i = 0; i < inputSize + 1; ++i)
-	{
-		m->data[i] = (double) ((double) rand() / (RAND_MAX) +1) / 2;
-	}
+		m->data[i] = dis(re);
 	return (int*) m;
 }
 

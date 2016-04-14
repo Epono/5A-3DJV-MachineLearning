@@ -31,6 +31,20 @@ public class MainScript : MonoBehaviour {
     [DllImport("LearningDllForUnity")]
     public extern static void LinearPerceptronRegression_Deletion(System.IntPtr index);
 
+    /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    [DllImport("LearningDllForUnity")]
+    public extern static System.IntPtr LinearPerceptronMultiLayersClassification_Creation(int inputSize, int[] layersSize, int size);
+
+    [DllImport("LearningDllForUnity")]
+    public extern static void LinearPerceptronMultiLayersClassification_Training(System.IntPtr index, int iterationsCount, int size, int inputSize, double[] inputInput, double[] inputResult);
+
+    [DllImport("LearningDllForUnity")]
+    public extern static double LinearPerceptronMultiLayersClassification_Predict(System.IntPtr index, int layerInd, int modelInd, double[] input, int inputSize, int inputInd);
+
+    [DllImport("LearningDllForUnity")]
+    public extern static void LinearPerceptronMultiLayersClassification_Deletion(System.IntPtr index);
+
     [SerializeField]
     Material defaultMaterial;
 
@@ -53,7 +67,8 @@ public class MainScript : MonoBehaviour {
             }
         }
 
-        index = LinearPerceptronClassification_Creation(2);
+        //index = LinearPerceptronClassification_Creation(2);
+        index = LinearPerceptronMultiLayersClassification_Creation(2, new int[] { 2, 1 }, 2);
         List<double> listInputInput = new List<double>();
         List<double> listInputResult = new List<double>();
         foreach(GameObject go in tab) {
@@ -66,16 +81,19 @@ public class MainScript : MonoBehaviour {
         double[] inputInput = listInputInput.ToArray();
         double[] inputResult = listInputResult.ToArray();
 
-        LinearPerceptronClassification_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
+        //LinearPerceptronClassification_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
+        LinearPerceptronMultiLayersClassification_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
 
-        foreach(GameObject go in tab) {
+        foreach (GameObject go in tab) {
             if(go.transform.position.y == 0) {
-                float newY = (float)LinearPerceptronClassification_Predict(index, 2, new double[2] { go.transform.position.x, go.transform.position.z });
+                //float newY = (float)LinearPerceptronClassification_Predict(index, 2, new double[2] { go.transform.position.x, go.transform.position.z });
+                float newY = (float)LinearPerceptronMultiLayersClassification_Predict(index, 1, 0, new double[2] { go.transform.position.x, go.transform.position.z }, 2, 0);
                 go.transform.position = new Vector3(go.transform.position.x, newY / 2, go.transform.position.z);
             }
         }
 
-        LinearPerceptronClassification_Deletion(index);
+        //LinearPerceptronClassification_Deletion(index);
+        LinearPerceptronMultiLayersClassification_Deletion(index);
     }
 
     public void Train_SimpleCrossClassification() {
