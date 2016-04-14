@@ -47,8 +47,10 @@ public class MainScript : MonoBehaviour {
 
     public void Train_SimpleClassification() {
 
-        foreach(GameObject go in tab) {
-            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+        foreach(GameObject go in tab)
+        {
+            if (!go.GetComponent<SphereScript>().isExample)
+            {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -83,7 +85,7 @@ public class MainScript : MonoBehaviour {
     public void Train_SimpleCrossClassification() {
 
         foreach(GameObject go in tab) {
-            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+            if(!go.GetComponent<SphereScript>().isExample) {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -115,8 +117,10 @@ public class MainScript : MonoBehaviour {
 
     public void Train_SimpleXORClassification() {
 
-        foreach(GameObject go in tab) {
-            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+        foreach(GameObject go in tab)
+        {
+            if (!go.GetComponent<SphereScript>().isExample)
+            {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -147,8 +151,10 @@ public class MainScript : MonoBehaviour {
 
     public void Train_SimpleSquareClassification() {
 
-        foreach(GameObject go in tab) {
-            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+        foreach(GameObject go in tab)
+        {
+            if (!go.GetComponent<SphereScript>().isExample)
+            {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -180,8 +186,10 @@ public class MainScript : MonoBehaviour {
 
     public void Train_SimpleRegression() {
 
-        foreach(GameObject go in tab) {
-            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+        foreach(GameObject go in tab)
+        {
+            if (!go.GetComponent<SphereScript>().isExample)
+            {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }

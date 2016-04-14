@@ -16,10 +16,29 @@ public class SphereScript : MonoBehaviour {
     [SerializeField]
     Material greenMaterial;
 
-    public bool isExample = true;
+    public bool isExample;
 
     // Use this for initialization
     void Start() {
+        if (gameObject.transform.position.y == 1)
+        {
+            gameObject.GetComponent<Renderer>().material = redMaterial;
+            gameObject.GetComponent<SphereScript>().isExample = true;
+        }
+        else if (gameObject.transform.position.y == -1)
+        {
+            gameObject.GetComponent<Renderer>().material = blueMaterial;
+            gameObject.GetComponent<SphereScript>().isExample = true;
+        }
+        else if (gameObject.transform.position.y == 2)
+        {
+            gameObject.GetComponent<Renderer>().material = greenMaterial;
+            gameObject.GetComponent<SphereScript>().isExample = true;
+        }
+        else {
+            gameObject.GetComponent<Renderer>().material = defaultMaterial;
+            gameObject.GetComponent<SphereScript>().isExample = false;
+        }
 
     }
 
@@ -28,13 +47,16 @@ public class SphereScript : MonoBehaviour {
         if(!Application.isPlaying) {
             if(gameObject.transform.position.y == 1) {
                 gameObject.GetComponent<Renderer>().material = redMaterial;
+                gameObject.GetComponent<SphereScript>().isExample = true;
             } else if(gameObject.transform.position.y == -1) {
                 gameObject.GetComponent<Renderer>().material = blueMaterial;
+                gameObject.GetComponent<SphereScript>().isExample = true;
             } else if(gameObject.transform.position.y == 2) {
                 gameObject.GetComponent<Renderer>().material = greenMaterial;
+                gameObject.GetComponent<SphereScript>().isExample = true;
             } else {
                 gameObject.GetComponent<Renderer>().material = defaultMaterial;
-                isExample = false;
+                gameObject.GetComponent<SphereScript>().isExample = false;
             }
         }
     }
