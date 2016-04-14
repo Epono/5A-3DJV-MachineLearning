@@ -6,10 +6,10 @@
 int* LinearPerceptronMultiLayersClassification_Creation(int inputSize, int* layersSize, int size)
 {
 	ModelMultiLayers* modelMultiLayers = new ModelMultiLayers();
-	modelMultiLayers->numberOfInternLayers = size;
-	modelMultiLayers->layers = new Layer*[modelMultiLayers->numberOfInternLayers];
+	modelMultiLayers->numberOfLayers = size;
+	modelMultiLayers->layers = new Layer*[modelMultiLayers->numberOfLayers];
 
-	for(int i = 0; i < modelMultiLayers->numberOfInternLayers; ++i)
+	for(int i = 0; i < modelMultiLayers->numberOfLayers; ++i)
 	{
 		Layer* tempLayer = new Layer();
 		tempLayer->layerNumber = i;
@@ -55,13 +55,13 @@ void LinearPerceptronMultiLayersClassification_Training(int* index, int iteratio
 			dataTableToTest[j] = inputInput[(dataToTest*inputSize) + j];
 		
 		// Pour tous les neurones de la derniere couche on calcule le delta
-		for (int j = 0; j < m->layers[m->numberOfInternLayers]->numberOfModels; ++j)
+		for (int j = 0; j < m->layers[m->numberOfLayers]->numberOfModels; ++j)
 		{
-			double xjl = LinearPerceptronMultiLayersClassification_Predict((int*)m, m->numberOfInternLayers, j, dataTableToTest, inputSize, 0);
-			m->layers[m->numberOfInternLayers]->models[j]->delta = (1 - xjl * xjl) * (xjl - inputResult[dataToTest]);
+			double xjl = LinearPerceptronMultiLayersClassification_Predict((int*)m, m->numberOfLayers, j, dataTableToTest, inputSize, 0);
+			m->layers[m->numberOfLayers]->models[j]->delta = (1 - xjl * xjl) * (xjl - inputResult[dataToTest]);
 		}
 		// De l'avant derniere jusque la premiere couche
-		for (int j = m->numberOfInternLayers - 1; j >= 0; --j)
+		for (int j = m->numberOfLayers - 1; j >= 0; --j)
 		{
 			// On itere sur tous les neurones de la couche
 			for (int k = 0; k < m->layers[j]->numberOfModels; ++k)
@@ -74,7 +74,7 @@ void LinearPerceptronMultiLayersClassification_Training(int* index, int iteratio
 			}
 		}
 		// On met a jour les poids
-		for (int j = 0; j < m->numberOfInternLayers; ++j)
+		for (int j = 0; j < m->numberOfLayers; ++j)
 			for (int k = 0; k < m->layers[j]->numberOfModels; ++k)
 				for (int l = 0; l < m->layers[j]->models[k]->numberOfParameters; ++l)
 					m->layers[j]->models[k]->data[l] -= pas * LinearPerceptronMultiLayersClassification_Predict((int*)m, j, k, dataTableToTest, inputSize, 0) * m->layers[j]->models[k]->delta;
@@ -105,7 +105,7 @@ void LinearPerceptronMultiLayersClassification_Deletion(int* index)
 {
 	ModelMultiLayers* modelMultiLayers = (ModelMultiLayers*) index;
 
-	for(int i = 0; i < modelMultiLayers->numberOfInternLayers; ++i)
+	for(int i = 0; i < modelMultiLayers->numberOfLayers; ++i)
 	{
 		Layer* tempLayer = modelMultiLayers->layers[i];
 

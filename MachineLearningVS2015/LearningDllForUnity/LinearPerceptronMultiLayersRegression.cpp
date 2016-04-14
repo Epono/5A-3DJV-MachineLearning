@@ -6,10 +6,10 @@
 int* LinearPerceptronMultiLayersRegression_Creation(int inputSize, int* layersSize, int size)
 {
 	ModelMultiLayers* modelMultiLayers = new ModelMultiLayers();
-	modelMultiLayers->numberOfInternLayers = size;
-	modelMultiLayers->layers = new Layer*[modelMultiLayers->numberOfInternLayers];
+	modelMultiLayers->numberOfLayers = size;
+	modelMultiLayers->layers = new Layer*[modelMultiLayers->numberOfLayers];
 
-	for(int i = 0; i < modelMultiLayers->numberOfInternLayers; ++i)
+	for(int i = 0; i < modelMultiLayers->numberOfLayers; ++i)
 	{
 		Layer* tempLayer = new Layer();
 		tempLayer->layerNumber = i;
@@ -54,7 +54,7 @@ void LinearPerceptronMultiLayersRegression_Deletion(int* index)
 {
 	ModelMultiLayers* modelMultiLayers = (ModelMultiLayers*) index;
 
-	for(int i = 0; i < modelMultiLayers->numberOfInternLayers; ++i)
+	for(int i = 0; i < modelMultiLayers->numberOfLayers; ++i)
 	{
 		Layer* tempLayer = modelMultiLayers->layers[i];
 
