@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
-using System;
 
 public class MainScript : MonoBehaviour {
 
@@ -62,7 +61,7 @@ public class MainScript : MonoBehaviour {
     public void Train_SimpleClassification() {
 
         foreach(GameObject go in tab) {
-            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+            if(!go.GetComponent<SphereScript>().isExample) {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -71,6 +70,8 @@ public class MainScript : MonoBehaviour {
         index = LinearPerceptronMultiLayersClassification_Creation(2, new int[] { 2, 1 }, 2);
         List<double> listInputInput = new List<double>();
         List<double> listInputResult = new List<double>();
+
+        // Pour chaque exemple (boule bleue ou rouge)
         foreach(GameObject go in tab) {
             if(go.transform.position.y != 0) {
                 listInputInput.Add(go.transform.position.x);
@@ -99,7 +100,7 @@ public class MainScript : MonoBehaviour {
     public void Train_SimpleCrossClassification() {
 
         foreach(GameObject go in tab) {
-            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+            if(!go.GetComponent<SphereScript>().isExample) {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -132,7 +133,7 @@ public class MainScript : MonoBehaviour {
     public void Train_SimpleXORClassification() {
 
         foreach(GameObject go in tab) {
-            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+            if(!go.GetComponent<SphereScript>().isExample) {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -164,7 +165,7 @@ public class MainScript : MonoBehaviour {
     public void Train_SimpleSquareClassification() {
 
         foreach(GameObject go in tab) {
-            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+            if(!go.GetComponent<SphereScript>().isExample) {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }
@@ -197,7 +198,7 @@ public class MainScript : MonoBehaviour {
     public void Train_SimpleRegression() {
 
         foreach(GameObject go in tab) {
-            if(go.transform.position.y == 0.5 || go.transform.position.y == -0.5) {
+            if(!go.GetComponent<SphereScript>().isExample) {
                 go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
             }
         }

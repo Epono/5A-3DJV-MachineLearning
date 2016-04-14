@@ -115,15 +115,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\LearningDllForUnity\BasicRBF.cpp" />
     <ClCompile Include="..\LearningDllForUnity\LinearPerceptronClassification.cpp" />
     <ClCompile Include="..\LearningDllForUnity\LinearPerceptronMultiLayersClassification.cpp" />
+    <ClCompile Include="..\LearningDllForUnity\LinearPerceptronMultiLayersRegression.cpp" />
     <ClCompile Include="..\LearningDllForUnity\LinearPerceptronRegression.cpp" />
+    <ClCompile Include="..\LearningDllForUnity\LloydsRBF.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\LearningDllForUnity\BasicRBF.h" />
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronClassification.h" />
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronMultiLayersClassification.h" />
+    <ClInclude Include="..\LearningDllForUnity\LinearPerceptronMultiLayersRegression.h" />
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronRegression.h" />
+    <ClInclude Include="..\LearningDllForUnity\LloydsRBF.h" />
+    <ClInclude Include="..\LearningDllForUnity\Model.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -35,7 +35,7 @@ struct Layer
 struct ModelMultiLayers
 {
 	// Nombre de couches
-	int numberOfInternLayers;
+	int numberOfLayers;
 
 	// Tableau de pointeurs sur les couches
 	Layer** layers;
