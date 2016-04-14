@@ -113,15 +113,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BasicRBF.h" />
     <ClInclude Include="LinearPerceptronClassification.h" />
     <ClInclude Include="LinearPerceptronMultiLayersClassification.h" />
+    <ClInclude Include="LinearPerceptronMultiLayersRegression.h" />
     <ClInclude Include="LinearPerceptronRegression.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="LloydsRBF.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BasicRBF.cpp" />
     <ClCompile Include="LinearPerceptronClassification.cpp" />
     <ClCompile Include="LinearPerceptronMultiLayersClassification.cpp" />
+    <ClCompile Include="LinearPerceptronMultiLayersRegression.cpp" />
     <ClCompile Include="LinearPerceptronRegression.cpp" />
+    <ClCompile Include="LloydsRBF.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

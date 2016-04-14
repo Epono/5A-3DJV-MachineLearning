@@ -13,30 +13,60 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Linear">
+      <UniqueIdentifier>{a0616fe7-7e42-4a57-bdfd-d0c47af5433b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Non_Linear">
+      <UniqueIdentifier>{227d78a1-32ec-413d-8a83-7b8c54127251}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Linear">
+      <UniqueIdentifier>{8b3fc52c-9845-4194-83f9-de3f348f40d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Non_Linear">
+      <UniqueIdentifier>{c9f6aa6c-cd4d-42a4-aac2-cd7f0a9f3a62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\LearningDllForUnity\LinearPerceptronClassification.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\LearningDllForUnity\LinearPerceptronRegression.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Linear</Filter>
     </ClCompile>
     <ClCompile Include="..\LearningDllForUnity\LinearPerceptronMultiLayersClassification.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="..\LearningDllForUnity\LinearPerceptronMultiLayersRegression.cpp">
+      <Filter>Source Files\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="..\LearningDllForUnity\LinearPerceptronRegression.cpp">
+      <Filter>Source Files\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="..\LearningDllForUnity\BasicRBF.cpp">
+      <Filter>Source Files\Non_Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="..\LearningDllForUnity\LloydsRBF.cpp">
+      <Filter>Source Files\Non_Linear</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronClassification.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\LearningDllForUnity\LinearPerceptronRegression.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Linear</Filter>
     </ClInclude>
     <ClInclude Include="..\LearningDllForUnity\LinearPerceptronMultiLayersClassification.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LearningDllForUnity\LinearPerceptronMultiLayersRegression.h">
+      <Filter>Header Files\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LearningDllForUnity\LinearPerceptronRegression.h">
+      <Filter>Header Files\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LearningDllForUnity\BasicRBF.h">
+      <Filter>Header Files\Non_Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LearningDllForUnity\LloydsRBF.h">
+      <Filter>Header Files\Non_Linear</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

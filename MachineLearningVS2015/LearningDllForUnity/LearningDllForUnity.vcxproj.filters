@@ -13,30 +13,60 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Linear">
+      <UniqueIdentifier>{4b344894-95e6-4dc7-8b9e-6fdbc29736dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Non_Linear">
+      <UniqueIdentifier>{b1607815-f7dc-40e0-8862-ad46dee5617d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Linear">
+      <UniqueIdentifier>{41ee4468-c3fe-48a6-9417-ea306c81895f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Non_Linear">
+      <UniqueIdentifier>{d47070df-81f0-4728-b571-e57521435b1b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinearPerceptronClassification.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LinearPerceptronRegression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Linear</Filter>
     </ClInclude>
     <ClInclude Include="LinearPerceptronMultiLayersClassification.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearPerceptronMultiLayersRegression.h">
+      <Filter>Header Files\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearPerceptronRegression.h">
+      <Filter>Header Files\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicRBF.h">
+      <Filter>Header Files\Non_Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="LloydsRBF.h">
+      <Filter>Header Files\Non_Linear</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LinearPerceptronClassification.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LinearPerceptronRegression.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Linear</Filter>
     </ClCompile>
     <ClCompile Include="LinearPerceptronMultiLayersClassification.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearPerceptronMultiLayersRegression.cpp">
+      <Filter>Source Files\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearPerceptronRegression.cpp">
+      <Filter>Source Files\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicRBF.cpp">
+      <Filter>Source Files\Non_Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="LloydsRBF.cpp">
+      <Filter>Source Files\Non_Linear</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
