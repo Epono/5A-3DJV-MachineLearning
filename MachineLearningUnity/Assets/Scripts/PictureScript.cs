@@ -38,7 +38,7 @@ public class PictureScript : MonoBehaviour
         List<double> a27 = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         List<List<double>> l = new List<List<double>>() { a, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27 };
-        PictureScript r = new PictureScript(l, 1);
+        PictureScript r = new PictureScript(l, 1, true);
     }
 
     #region Fields
@@ -53,7 +53,9 @@ public class PictureScript : MonoBehaviour
     {
         get
         {
-            return null;
+            List<double> result = new List<double>();
+            _pixels.ForEach(line => line.ForEach(pixel => result.Add(_pixelMaterial[pixel])));
+            return result;
         }
     }
     public int GetDigit
