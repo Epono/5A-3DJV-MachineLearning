@@ -44,21 +44,11 @@ public class PictureScript{
         _go = PlanePoolManager.Instance.GetPlane();
         _go.tag = "IMAGE_TEST";
         _go.transform.position = imapgePosition;
+
         if (isExample)
             _go.tag = "IMAGE_EXAMPLE";
-        string test = "";
         _texture = new Texture2D(rowSize, imageData.Count / rowSize);
-        //for (int i = 0; i < 28*28; i+=28) {
-        //    for (int j = 0; j < 28; ++j)
-        //    {
-        //        float color = ((float)imageData[j + i]);
-        //        test += color;
-        //        Color c = new Color(color, 0, 0);
-        //        _texture.SetPixel(i/28, j, c);
-        //        _texture.Apply();
-        //    }
-        //    test += "\n";
-        //}
+        _texture.Apply(true);
         for (int i = 0; i < imageData.Count; i += rowSize)
         {
             for (int j = 0; j < rowSize; ++j)
@@ -68,13 +58,12 @@ public class PictureScript{
                 _texture.SetPixel(j, i / rowSize, c);
                 _texture.Apply(true);
             }
-            test += "\n";
         }
-        Debug.Log(test);
         _texture.Apply();
-        Texture testa = new Texture();
-        testa = _texture;
-        _go.GetComponent<Renderer>().material.mainTexture = testa;
+        _go.GetComponent<Renderer>().material.mainTexture = _texture;
+    }
+
+    public void ShowTrueValue() {
     }
     #endregion
 }

@@ -249,4 +249,10 @@ public class DigitsScript : MonoBehaviour {
             LinearPerceptronClassification_Deletion(models[i]);
         }
     }
+
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Return)) {
+
+            }
+    }
 }
