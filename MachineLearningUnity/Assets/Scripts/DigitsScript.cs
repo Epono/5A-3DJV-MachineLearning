@@ -216,6 +216,7 @@ public class DigitsScript : MonoBehaviour {
         }
 
         Ein = numberOfSuccessExamples / examples.Count;
+        Debug.Log("Ein : " + Ein);
 
         // Calcul de Eout (predict sur le jeu de test)
         double Eout;
@@ -240,14 +241,39 @@ public class DigitsScript : MonoBehaviour {
         }
 
         Eout = numberOfSuccessTests / tests.Count;
-
-        Debug.Log("Ein : " + Ein);
         Debug.Log("Eout : " + Eout);
 
-        // Suppression
-        for(int i = 0; i < 10; ++i) {
-            LinearPerceptronClassification_Deletion(models[i]);
+        //// Suppression
+        //for(int i = 0; i < 10; ++i) {
+        //    LinearPerceptronClassification_Deletion(models[i]);
+        //}
+    }
+
+    public void Test_Digit() {
+        // Calcul de Eout (predict sur le jeu de test)
+        double Eout;
+        int numberOfSuccessTests = 0;
+        // Pour chaque image
+        foreach(PictureScript ps in tests) {
+
+            double[] inputs = ps.GetPixelsColor.ToArray();
+
+            // Pour chaque model
+            for(int i = 0; i < 10; ++i) {
+                //results.Add(i, LinearPerceptronClassification_Predict(models[i], 28 * 28, inputs));
+            }
+
+            // on affiche ce qu'on a décidé
+            for(int i = 0; i < 10; ++i) {
+                //Debug.Log(" i = " + i + ": " + results[i]);
+                //if(results[i] == 1 && i == ps.GetDigit) {
+                //    numberOfSuccessTests++;
+                //}
+            }
         }
+
+        Eout = numberOfSuccessTests / tests.Count;
+        Debug.Log("Eout : " + Eout);
     }
 
     void Update() {

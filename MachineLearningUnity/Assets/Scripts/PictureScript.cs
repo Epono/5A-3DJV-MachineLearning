@@ -55,7 +55,7 @@ public class PictureScript{
             {
                 float color = ((float)imageData[j + i]);
                 Color c = new Color(color, color, color);
-                _texture.SetPixel(j, i / rowSize, c);
+                _texture.SetPixel(-j, i / rowSize, c);
                 _texture.Apply(true);
             }
         }
