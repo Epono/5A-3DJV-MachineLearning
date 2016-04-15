@@ -1,49 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
-public class PictureScript : MonoBehaviour {
-
-
-    void Start() {
-        List<double> a = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a1 = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a2 = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a3 = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a4 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a5 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a6 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a7 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a8 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a9 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a10 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a11 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a12 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a13 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a14 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a15 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a16 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a17 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a18 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a19 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a20 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a21 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a22 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a23 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a24 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a25 = new List<double>() { 0, 100, 200, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a26 = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        List<double> a27 = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-        List<List<double>> l = new List<List<double>>() { a, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27 };
-        PictureScript r = new PictureScript(l, 1, true);
-    }
-
+public class PictureScript {
     #region Fields
-    List<List<int>> _pixels;
-    Dictionary<int, double> _pixelMaterial;
-    GameObject _go = null;
+    Texture2D _texture;
     int _digit;
+    GameObject _go;
+    int _predictedValue = 0;
     #endregion
 
     #region Properties
@@ -52,7 +17,11 @@ public class PictureScript : MonoBehaviour {
         get
         {
             List<double> result = new List<double>();
-            _pixels.ForEach(line => line.ForEach(pixel => result.Add(_pixelMaterial[pixel])));
+            for(int i = 0; i < _texture.height; ++i) {
+                for(int j = 0; j < _texture.width; ++j) {
+                    result.Add(_texture.GetPixel(i, j).r);
+                }
+            }
             return result;
         }
     }
@@ -70,49 +39,43 @@ public class PictureScript : MonoBehaviour {
     #endregion
 
     #region Public Methods
-    public PictureScript(List<List<double>> imageData, int digit, bool isExample) {
-        _pixelMaterial = new Dictionary<int, double>();
-        _pixels = new List<List<int>>();
-        _digit = digit;
-
-        _go = new GameObject("Image" + digit);
+    public PictureScript(List<double> imageData, int rowSize, int digit, bool isExample, Vector3 imapgePosition) {
+        _go = PlanePoolManager.Instance.GetPlane();
         _go.tag = "IMAGE_TEST";
+        _go.transform.position = imapgePosition;
+        _digit = digit;
+        Transform textchild = _go.transform.GetChild(0);
+        TextMesh txt = textchild.GetComponent<TextMesh>();
+        txt.text = digit.ToString();
         if(isExample)
             _go.tag = "IMAGE_EXAMPLE";
-
-        for(int i = 0; i < imageData.Count; ++i) {
-            List<double> line = imageData[i];
-            GameObject pixelLine = new GameObject("PixelLine");
-            List<int> pixelLineV = new List<int>();
-            pixelLine.transform.parent = _go.transform;
-
-            for(int j = 0; j < line.Count; ++j) {
-                double pixelP = line[j];
-                GameObject pixel = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                int pixelID = pixel.GetInstanceID();
-                pixelLineV.Add(pixelID);
-                pixel.name = "Pixel";
-                pixel.transform.parent = pixelLine.transform;
-                pixel.transform.localScale = new Vector3(.1f, .1f, .1f);
-                pixel.transform.localPosition = new Vector3(i, 0, j);
-                Material color = new Material(Shader.Find("Standard"));
-                color.color = new Color(255 - (float)imageData[i][j], 255 - (float)imageData[i][j], 255 - (float)imageData[i][j]);
-                _pixelMaterial.Add(pixelID, imageData[i][j]);
-                pixel.GetComponent<Renderer>().material.color = new Color(255 - (float)imageData[i][j], 255 - (float)imageData[i][j], 255 - (float)imageData[i][j]);
+        _texture = new Texture2D(rowSize, imageData.Count / rowSize);
+        _texture.Apply(true);
+        for(int i = 0; i < imageData.Count; i += rowSize) {
+            for(int j = 0; j < rowSize; ++j) {
+                float color = ((float)imageData[j + i]);
+                Color c = new Color(color, color, color);
+                _texture.SetPixel(-j, i / rowSize, c);
+                _texture.Apply(true);
             }
-            _pixels.Add(pixelLineV);
         }
+        _texture.Apply();
+        _go.GetComponent<Renderer>().material.mainTexture = _texture;
     }
 
-    public void SetColorOfPixel(int pixelX, int pixelY, float grayValue) {
-        Material color = new Material(Shader.Find("Standard"));
-        Color newColor = new Color(255 - grayValue, 255 - grayValue, 255 - grayValue);
+    public void ShowTrueValue(bool HaveToShowValue) {
+        _go.transform.FindChild("text").gameObject.SetActive(HaveToShowValue);
+        _go.GetComponent<MeshRenderer>().enabled = !HaveToShowValue;
+    }
 
+    public void SetPredictedValue(int predictedValue) {
+        _predictedValue = predictedValue;
+    }
 
-
-        int id = _pixels[pixelY][pixelX];
-        _pixelMaterial[id] = grayValue;
-
+    public void ShowPredictedValue(bool showPredictedValue) {
+        Transform textchild = _go.transform.GetChild(0);
+        TextMesh txt = textchild.GetComponent<TextMesh>();
+        txt.text = showPredictedValue ? _predictedValue.ToString() : _digit.ToString();
     }
     #endregion
 }
