@@ -58,7 +58,7 @@ public class MainScript : MonoBehaviour {
 
     }
 
-    public void Train_SimpleClassification() {
+    public void Train_MultiLayersClassification() {
 
         foreach(GameObject go in tab) {
             if(!go.GetComponent<SphereScript>().isExample) {
@@ -85,7 +85,7 @@ public class MainScript : MonoBehaviour {
         //LinearPerceptronClassification_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
         LinearPerceptronMultiLayersClassification_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
 
-        foreach (GameObject go in tab) {
+        foreach(GameObject go in tab) {
             if(go.transform.position.y == 0) {
                 //float newY = (float)LinearPerceptronClassification_Predict(index, 2, new double[2] { go.transform.position.x, go.transform.position.z });
                 float newY = (float)LinearPerceptronMultiLayersClassification_Predict(index, 1, 0, new double[2] { go.transform.position.x, go.transform.position.z }, 2, 0);
@@ -95,6 +95,45 @@ public class MainScript : MonoBehaviour {
 
         //LinearPerceptronClassification_Deletion(index);
         LinearPerceptronMultiLayersClassification_Deletion(index);
+    }
+
+    public void Train_SimpleClassification() {
+
+        foreach(GameObject go in tab) {
+            if(!go.GetComponent<SphereScript>().isExample) {
+                go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
+            }
+        }
+
+        //index = LinearPerceptronClassification_Creation(2);
+        index = LinearPerceptronClassification_Creation(2);
+        List<double> listInputInput = new List<double>();
+        List<double> listInputResult = new List<double>();
+
+        // Pour chaque exemple (boule bleue ou rouge)
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y != 0) {
+                listInputInput.Add(go.transform.position.x);
+                listInputInput.Add(go.transform.position.z);
+                listInputResult.Add(go.transform.position.y);
+            }
+        }
+        double[] inputInput = listInputInput.ToArray();
+        double[] inputResult = listInputResult.ToArray();
+
+        //LinearPerceptronClassification_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
+        LinearPerceptronClassification_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
+
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y == 0) {
+                //float newY = (float)LinearPerceptronClassification_Predict(index, 2, new double[2] { go.transform.position.x, go.transform.position.z });
+                float newY = (float)LinearPerceptronClassification_Predict(index, 1, new double[2] { go.transform.position.x, go.transform.position.z });
+                go.transform.position = new Vector3(go.transform.position.x, newY / 2, go.transform.position.z);
+            }
+        }
+
+        //LinearPerceptronClassification_Deletion(index);
+        LinearPerceptronClassification_Deletion(index);
     }
 
     public void Train_SimpleCrossClassification() {
