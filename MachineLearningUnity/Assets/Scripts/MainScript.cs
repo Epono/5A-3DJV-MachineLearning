@@ -44,8 +44,22 @@ public class MainScript : MonoBehaviour {
     [DllImport("LearningDllForUnity")]
     public extern static void LinearPerceptronMultiLayersClassification_Deletion(System.IntPtr index);
 
-    [SerializeField]
-    Material defaultMaterial;
+    /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    [DllImport("LearningDllForUnity")]
+    public extern static System.IntPtr BasicRBF_Creation(int inputSize);
+
+    [DllImport("LearningDllForUnity")]
+    public extern static void BasicRBF_Training(System.IntPtr index, int iterationsCount, int size, int inputSize, double[] inputInput, double[] inputResult);
+
+    [DllImport("LearningDllForUnity")]
+    public extern static double BasicRBF_Classification_Predict(System.IntPtr index, int inputSize, double[] input);
+
+    [DllImport("LearningDllForUnity")]
+    public extern static double BasicRBF_Regression_Predict(System.IntPtr index, int inputSize, double[] input);
+
+    [DllImport("LearningDllForUnity")]
+    public extern static void BasicRBF_Deletion(System.IntPtr index);
 
     GameObject[] tab;
     System.IntPtr index;
@@ -424,6 +438,8 @@ public class MainScript : MonoBehaviour {
         LinearPerceptronRegression_Deletion(indexGreen);
     }
 
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void Train_MultiLayersClassification() {
 
         foreach(GameObject go in tab) {
@@ -458,5 +474,78 @@ public class MainScript : MonoBehaviour {
         }
 
         LinearPerceptronMultiLayersClassification_Deletion(index);
+    }
+
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void Train_RBFClassification() {
+
+        foreach(GameObject go in tab) {
+            if(!go.GetComponent<SphereScript>().isExample) {
+                go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
+            }
+        }
+
+        index = BasicRBF_Creation(2);
+        List<double> listInputInput = new List<double>();
+        List<double> listInputResult = new List<double>();
+
+        // Pour chaque exemple (boule bleue ou rouge)
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y != 0) {
+                listInputInput.Add(go.transform.position.x);
+                listInputInput.Add(go.transform.position.z);
+                listInputResult.Add(go.transform.position.y);
+            }
+        }
+        double[] inputInput = listInputInput.ToArray();
+        double[] inputResult = listInputResult.ToArray();
+
+        BasicRBF_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
+
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y == 0) {
+                float newY = (float)BasicRBF_Classification_Predict(index, 2, new double[2] { go.transform.position.x, go.transform.position.z });
+                go.transform.position = new Vector3(go.transform.position.x, newY / 2, go.transform.position.z);
+            }
+        }
+
+        BasicRBF_Deletion(index);
+    }
+
+    public void Train_RBFRegression() {
+
+        foreach(GameObject go in tab) {
+            if(!go.GetComponent<SphereScript>().isExample) {
+                go.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
+            }
+        }
+
+        index = BasicRBF_Creation(2);
+        List<double> listInputInput = new List<double>();
+        List<double> listInputResult = new List<double>();
+
+        // Pour chaque exemple (boule bleue ou rouge)
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y != 0) {
+                listInputInput.Add(go.transform.position.x);
+                listInputInput.Add(go.transform.position.z);
+                listInputResult.Add(go.transform.position.y);
+            }
+        }
+        double[] inputInput = listInputInput.ToArray();
+        double[] inputResult = listInputResult.ToArray();
+
+        BasicRBF_Training(index, 10000, inputInput.Length / 2, 2, inputInput, inputResult);
+
+        foreach(GameObject go in tab) {
+            if(go.transform.position.y == 0) {
+                float newY = (float)BasicRBF_Regression_Predict(index, 2, new double[2] { go.transform.position.x, go.transform.position.z });
+                go.transform.position = new Vector3(go.transform.position.x, newY / 2, go.transform.position.z);
+            }
+        }
+
+        BasicRBF_Deletion(index);
     }
 }
