@@ -96,7 +96,7 @@ void TestLinearPerceptronMultiLayerClassification()
 	{
 		for (int x = 0; x < 20; ++x)
 		{
-			double tab[] = { x,y };
+			double tab[] = { x/20.0,y/20.0 };
 			double result = LinearPerceptronMultiLayersClassification_Predict(ptr, 1, 0, tab, 2, 0);
 			std::cout << (result < 0 ? "" : " ") << result << " ";
 		}
@@ -121,7 +121,7 @@ void TestLinearPerceptronRegression()
 	tableauBite[3][3] = 1;
 	tableauBite[15][16] = -1;
 
-	double inputInput[]{2, 2, 3, 3, 15, 16};
+	double inputInput[]{2/20.0, 2 / 20.0, 3 / 20.0, 3 / 20.0, 15 / 20.0, 16 / 20.0 };
 	double inputResult[]{1, 1, -1};
 
 	for(int y = 19; y >= 0; --y)
