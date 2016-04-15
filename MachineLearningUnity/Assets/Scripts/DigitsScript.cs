@@ -6,6 +6,7 @@ using System.IO;
 
 public class DigitsScript : MonoBehaviour {
 
+
     [DllImport("LearningDllForUnity")]
     public extern static System.IntPtr LinearPerceptronClassification_Creation(int inputSize);
 
@@ -276,9 +277,10 @@ public class DigitsScript : MonoBehaviour {
         Debug.Log("Eout : " + Eout);
     }
 
+    bool _isShowingTrueValue;
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Return)) {
-
-            }
+        if(Input.GetKeyDown(KeyCode.Return)) {
+            if(_isShowingTrueValue) { }
+        }
     }
 }

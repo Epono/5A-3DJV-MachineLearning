@@ -63,7 +63,13 @@ public class PictureScript{
         _go.GetComponent<Renderer>().material.mainTexture = _texture;
     }
 
-    public void ShowTrueValue() {
+    public void ShowTrueValue()
+    {
+        _go.transform.GetChild(0).gameObject.SetActive(true);
+    }
+    public void HideTrueValue()
+    {
+        _go.transform.GetChild(0).gameObject.SetActive(false);
     }
     #endregion
 }
