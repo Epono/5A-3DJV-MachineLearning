@@ -247,7 +247,8 @@ public class DigitsScript : MonoBehaviour {
             gameObject.transform.position -= new Vector3(0.5f, 0, 0);
         } else if(Input.GetKey(KeyCode.RightArrow)) {
             gameObject.transform.position += new Vector3(0.5f, 0, 0);
-        } else if(Input.GetKey(KeyCode.UpArrow)) {
+        }
+        if(Input.GetKey(KeyCode.UpArrow)) {
             gameObject.transform.position += new Vector3(0, 0, 0.5f);
         } else if(Input.GetKey(KeyCode.DownArrow)) {
             gameObject.transform.position -= new Vector3(0, 0, 0.5f);
