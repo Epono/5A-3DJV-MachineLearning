@@ -32,8 +32,8 @@ public class DigitsScript : MonoBehaviour {
     [DllImport("LearningDllForUnity")]
     public extern static void LinearPerceptronRegression_Deletion(System.IntPtr index);
 
-    GameObject[] examples;
-    GameObject[] tests;
+    List<PictureScript> examples = new List<PictureScript>();
+    List<PictureScript> tests = new List<PictureScript>();
 
     void Start() {
 
@@ -131,9 +131,8 @@ public class DigitsScript : MonoBehaviour {
         List<double> listInputInput = new List<Double>();
 
         // Pour chaque exemple (image)
-        foreach(GameObject go in examples) {
-
-            PictureScript ps = go.GetComponent<PictureScript>();
+        foreach(PictureScript ps in examples) {
+            
 
             // Pour chaque parametre (pixel)
             foreach(double pixelColor in ps.GetPixelsColor) {
@@ -166,9 +165,8 @@ public class DigitsScript : MonoBehaviour {
         double Ein;
         int numberOfSuccessExamples = 0;
         // Pour chaque image
-        foreach(GameObject go in examples) {
-
-            PictureScript ps = go.GetComponent<PictureScript>();
+        foreach(PictureScript ps in examples) {
+            
 
             double[] inputs = ps.GetPixelsColor.ToArray();
 
@@ -185,16 +183,17 @@ public class DigitsScript : MonoBehaviour {
                 }
             }
         }
-
-        Ein = numberOfSuccessExamples / examples.Length;
+        
+        Ein = numberOfSuccessExamples / examples.Count;
+        Debug.Log("Ein : " + Ein);
 
         // Calcul de Eout (predict sur le jeu de test)
         double Eout;
         int numberOfSuccessTests = 0;
         // Pour chaque image
-        foreach(GameObject go in tests) {
+        foreach(PictureScript go in tests) {
 
-            PictureScript ps = go.GetComponent<PictureScript>();
+            PictureScript ps =go;
 
             double[] inputs = ps.GetPixelsColor.ToArray();
 
@@ -211,16 +210,40 @@ public class DigitsScript : MonoBehaviour {
                 }
             }
         }
-
-        Eout = numberOfSuccessTests / tests.Length;
-
-        Debug.Log("Ein : " + Ein);
+        Eout = numberOfSuccessTests / tests.Count;
         Debug.Log("Eout : " + Eout);
 
-        // Suppression
-        for(int i = 0; i < 10; ++i) {
-            LinearPerceptronClassification_Deletion(models[i]);
+        //// Suppression
+        //for(int i = 0; i < 10; ++i) {
+        //    LinearPerceptronClassification_Deletion(models[i]);
+        //}
+    }
+
+    public void Test_Digit() {
+        // Calcul de Eout (predict sur le jeu de test)
+        double Eout;
+        int numberOfSuccessTests = 0;
+        // Pour chaque image
+        foreach(PictureScript ps in tests) {
+
+            double[] inputs = ps.GetPixelsColor.ToArray();
+
+            // Pour chaque model
+            for(int i = 0; i < 10; ++i) {
+                //results.Add(i, LinearPerceptronClassification_Predict(models[i], 28 * 28, inputs));
+            }
+
+            // on affiche ce qu'on a décidé
+            for(int i = 0; i < 10; ++i) {
+                //Debug.Log(" i = " + i + ": " + results[i]);
+                //if(results[i] == 1 && i == ps.GetDigit) {
+                //    numberOfSuccessTests++;
+                //}
+            }
         }
+
+        Eout = numberOfSuccessTests / tests.Count;
+        Debug.Log("Eout : " + Eout);
     }
     bool _isShowingTrueValue;
     void Update() {
