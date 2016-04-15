@@ -102,8 +102,8 @@ public class DigitsScript : MonoBehaviour {
         Debug.Log("La lecture du fichier train_light.csv a pris : " + ((end - start).TotalMilliseconds) / 1000 + " s");
         start = DateTime.Now;
 
-        for(int i = 0; i < 200; ++i) {
-            examples.Add(new PictureScript(pixelColors[i], 28, digits[i], true, new Vector3((i % 20) - 10, 0, 5 - (int)(i / 20))));
+        for(int i = 0; i < 100; ++i) {
+            examples.Add(new PictureScript(pixelColors[i], 28, digits[i], true, new Vector3((i % 100) - 10, 0, 5 - (int)(i / 100))));
         }
         end = DateTime.Now;
         Debug.Log("La création des scripts a pris : " + ((end - start).TotalMilliseconds) / 1000 + " s");
@@ -144,8 +144,8 @@ public class DigitsScript : MonoBehaviour {
         Debug.Log("La lecture du fichier test_light.csv a pris : " + ((end - start).TotalMilliseconds) / 1000 + " s");
 
         start = DateTime.Now;
-        for(int i = 0; i < testsCount; ++i) {
-            //tests.Add(new PictureScript(pixelColors[i], 28, digits[i], true, new Vector3(0, 0, 0)));
+        for(int i = 0; i < 100; ++i) {
+            tests.Add(new PictureScript(pixelColors[i], 28, digits[i], true, new Vector3((i % 100) - 10, -10, 5 - (int)(i / 100))));
         }
         end = DateTime.Now;
         Debug.Log("La création des scripts a pris : " + ((end - start).TotalMilliseconds) / 1000 + " s");
