@@ -11,20 +11,6 @@ public class PlanePoolManager {
     public static PlanePoolManager Instance = new PlanePoolManager();
 
     #endregion
-    #region Properties
-    public List<GameObject> UsedPlane
-    {
-        get
-        {
-            return _usedPlane;
-        }
-
-        set
-        {
-            _usedPlane = value;
-        }
-    }
-    #endregion
     #region Private Methods
     private PlanePoolManager()
     {

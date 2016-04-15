@@ -103,7 +103,7 @@ public class DigitsScript : MonoBehaviour {
         Debug.Log("La lecture du fichier train_light.csv a pris : " + ((end - start).TotalMilliseconds) / 1000 + " s");
         start = DateTime.Now;
 
-        for(int i = 0; i < 100; ++i) {
+        for(int i = 0; i < 10; ++i) {
             examples.Add(new PictureScript(pixelColors[i], 28, digits[i], true, new Vector3((i % 100) - 10, 0, 5 - (int)(i / 100))));
         }
         end = DateTime.Now;
@@ -145,7 +145,7 @@ public class DigitsScript : MonoBehaviour {
         Debug.Log("La lecture du fichier test_light.csv a pris : " + ((end - start).TotalMilliseconds) / 1000 + " s");
 
         start = DateTime.Now;
-        for(int i = 0; i < 100; ++i) {
+        for(int i = 0; i < 10; ++i) {
             tests.Add(new PictureScript(pixelColors[i], 28, digits[i], true, new Vector3((i % 100) - 10, -10, 5 - (int)(i / 100))));
         }
         end = DateTime.Now;
@@ -276,11 +276,12 @@ public class DigitsScript : MonoBehaviour {
         Eout = numberOfSuccessTests / tests.Count;
         Debug.Log("Eout : " + Eout);
     }
-
-    bool _isShowingTrueValue;
+    bool _isShowingTrueValue= false;
     void Update() {
-        if(Input.GetKeyDown(KeyCode.Return)) {
-            if(_isShowingTrueValue) { }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            _isShowingTrueValue = !_isShowingTrueValue;
+            examples.ForEach(s => s.ShowTrueValue(_isShowingTrueValue));
         }
     }
 }

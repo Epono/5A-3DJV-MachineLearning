@@ -44,7 +44,9 @@ public class PictureScript{
         _go = PlanePoolManager.Instance.GetPlane();
         _go.tag = "IMAGE_TEST";
         _go.transform.position = imapgePosition;
-
+        Transform textchild = _go.transform.GetChild(0);
+        TextMesh txt= textchild.GetComponent<TextMesh>();
+        txt.text = digit.ToString();
         if (isExample)
             _go.tag = "IMAGE_EXAMPLE";
         _texture = new Texture2D(rowSize, imageData.Count / rowSize);
@@ -63,13 +65,9 @@ public class PictureScript{
         _go.GetComponent<Renderer>().material.mainTexture = _texture;
     }
 
-    public void ShowTrueValue()
+    public void ShowTrueValue(bool HaveToShowValue)
     {
-        _go.transform.GetChild(0).gameObject.SetActive(true);
-    }
-    public void HideTrueValue()
-    {
-        _go.transform.GetChild(0).gameObject.SetActive(false);
+        _go.transform.FindChild("text").gameObject.SetActive(HaveToShowValue);
     }
     #endregion
 }
