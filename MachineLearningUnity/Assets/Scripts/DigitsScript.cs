@@ -245,11 +245,12 @@ public class DigitsScript : MonoBehaviour {
         Eout = numberOfSuccessTests / tests.Count;
         Debug.Log("Eout : " + Eout);
     }
-    bool _isShowingTrueValue;
+    bool _isShowingTrueValue= false;
     void Update() {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (_isShowingTrueValue) { }
+            _isShowingTrueValue = !_isShowingTrueValue;
+            examples.ForEach(s => s.ShowTrueValue(_isShowingTrueValue));
         }
     }
 }
