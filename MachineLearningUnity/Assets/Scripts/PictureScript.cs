@@ -55,7 +55,7 @@ public class PictureScript{
             {
                 float color = ((float)imageData[j + i]);
                 Color c = new Color(color, color, color);
-                _texture.SetPixel(j, i / rowSize, c);
+                _texture.SetPixel(-j, i / rowSize, c);
                 _texture.Apply(true);
             }
         }
@@ -63,7 +63,13 @@ public class PictureScript{
         _go.GetComponent<Renderer>().material.mainTexture = _texture;
     }
 
-    public void ShowTrueValue() {
+    public void ShowTrueValue()
+    {
+        _go.transform.GetChild(0).gameObject.SetActive(true);
+    }
+    public void HideTrueValue()
+    {
+        _go.transform.GetChild(0).gameObject.SetActive(false);
     }
     #endregion
 }
