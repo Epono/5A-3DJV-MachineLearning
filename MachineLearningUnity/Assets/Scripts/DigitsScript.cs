@@ -105,7 +105,7 @@ public class DigitsScript : MonoBehaviour {
 
         // TODO: Création des scripts
         for(int i = 0; i < 100; ++i) {
-            //PictureScript pictureScript = new PictureScript(l, 1, true);
+            PictureScript pictureScript = new PictureScript(pixelColors[0], 28, digits[0], true, new Vector3(0, 0, 0));
         }
 
         //for(int i = 0; i < examplesCount; ++i) {
