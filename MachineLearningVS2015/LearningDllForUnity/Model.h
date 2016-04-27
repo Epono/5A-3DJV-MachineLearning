@@ -15,6 +15,9 @@ struct Model
 
 	//Delta du neurone
 	double delta;
+
+	//Output du neurone
+	double x;
 };
 
 // Couche de neurones
